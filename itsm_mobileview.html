@@ -3,21 +3,79 @@
 <!--<link rel="stylesheet" href="lib\jquery.mobile-1.2.0.min.css" />
 	<script src="lib\jquery.js"></script>
 	<script src="lib\jquery.mobile-1.2.0.min.js"></script>-->
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="itsm_mobileview-0.1.js"></script>
 	<script>
-			$(document).ready(function() {
+	var credentials;
+	var userinfo;
+	var incidentsNumber = 0;
+	var changesNumber = 0;
+	var tasksNumber = 0;
+	var approvalsNumber = 0;
+
+	function listIncidents()
+	{
+		console.log('listIncidents called');
+		ITSM_MOBILEVIEW.getList(
+				credentials,
+				'HPD_IncidentInterface_WS',
+				'HelpDesk_QueryList_Service',
+				'\'Assignee Login ID\'="' + credentials.username + '" AND \'Status\'&lt;5',
+				function(request,status)
+				{
+					console.log('successListHPD_IncidentInterface_WS called');
+					$.mobile.loading('hide');
+					incidentsNumber = 0;
+					$(request).find("ns0\\:getListValues").each(function()
+					{
+						incidentsNumber++;
+						$("#incidentslist").append('<li><a href="line1"><h1>'+$(this).find("ns0\\:Incident_Number").text()+'-'+$(this).find("ns0\\:Priority").text()+'</h1><p>'+$(this).find("ns0\\:Summary").text()+'</p></a></li>');
+					});
+					$("#incidentscount").text(incidentsNumber);
+				},
+				function(request,status,error)
+				{
+					console.log('errorListHPD_IncidentInterface_WS called');
+					$.mobile.loading('hide');
+					alert("error : " + error);
+				}
+		);
+	}
+
+	$(document).ready(function() {
+			/* When user clicks "submit", get user's information via the getList function in the ITSM_MOBILEVIEW namespace */
 			$("#login_submit").click(function(event) {
 				event.preventDefault();
 				credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
-				getList(
+				ITSM_MOBILEVIEW.getList(
 					credentials,
 					'User',
 					'OpGetList',
-					'\'Login Name\'="' + credentials.username + '" AND \'Status\'=0'
+					'\'Login Name\'="' + credentials.username + '" AND \'Status\'=0',
+					function(xml){
+							$(xml).find("ns0\\:getListValues").each(function()
+							{
+								userinfo = {
+									fullname: $(this).find("ns0\\:Full_Name").text(),
+									license_type: $(this).find("ns0\\:License_Type").text(),
+									email: $(this).find("ns0\\:Email_Address").text(),
+									groupids: $(this).find("ns0\\:Group_List").text()
+								};
+								console.log('successListUser found user ' + userinfo.fullname);
+								$("#homeName").html(userinfo.fullname);
+								listIncidents();
+							});
+							$.mobile.changePage($("#homepage"));
+							$.mobile.loading('hide');
+						},
+					function(error){
+							$.mobile.loading('hide');
+							alert("Authentication error" + eval(error));
+						}
 				);
 			});
 		});
