@@ -6,14 +6,11 @@
 */
 ;ITSM_MOBILEVIEW = {
 	name: 'ITSM_MOBILEVIEW',
-	callService: function(credentials,service)
+	context: '/arsys',
+	callService: function(credentials,service,successFn,errorFn)
 	{
-		console.log('ITSM_MOBILEVIEW.callService called');
-		var successFunction = 'successList' + service;
-		var errorFunction = 'errorList' + service;
-		$.mobile.loading('show');
-		// need to parameterize target location url ?
-		var wsURL='/arsys/services/ARService?server=' + credentials.server + '&webService=MOB:UserCentral';
+		console.log(ITSM_MOBILEVIEW.name + ' [INFO] callService - service ' + service);
+		var wsURL = ITSM_MOBILEVIEW.context + '/services/ARService?server=' + credentials.server + '&webService=MOB:UserCentral';
 		// soap message for getList operations always have this structure
 		var soapMessage ='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:MOB:UserCentral">\
 						   <soapenv:Header>\
@@ -39,18 +36,22 @@
 			type: "POST",
 			dataType: "xml",
 			data: soapMessage,
-			success: window[successFunction],
-			error: window[errorFunction],
-			contentType: "text/xml; charset=\"utf-8\""				
+			contentType: "text/xml; charset=\"utf-8\"",				
+			success: function(xml){
+				console.log(ITSM_MOBILEVIEW.name + ' [INFO]   ...success');
+				successFn(xml);},
+			error: function(error){
+				console.log(ITSM_MOBILEVIEW.name + ' [ERROR]   ...error!');
+				errorFn(error);}
 		});
 		return false;
 	},
 	getList: function(credentials,webservice,operation,qualification,successFn,errorFn)
 	{
-		console.log('ITSM_MOBILEVIEW.getList called for operation ' + operation);
+		console.log(ITSM_MOBILEVIEW.name + ' [INFO] getList - operation ' + operation);
 		$.mobile.loading('show');
 		// need to parameterize target location url ?
-		var wsURL='/arsys/services/ARService?server=' + credentials.server + '&webService=' + webservice;
+		var wsURL = ITSM_MOBILEVIEW.context + '/services/ARService?server=' + credentials.server + '&webService=' + webservice;
 		// soap message for getList operations always have this structure
 		var soapMessage ='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:' + webservice + '">\
 						   <soapenv:Header>\
@@ -67,7 +68,7 @@
 							  </urn:' + operation + '>\
 						   </soapenv:Body>\
 						</soapenv:Envelope>';
-		console.log('ITSM_MOBILEVIEW.getList posting request ...');
+		console.log(ITSM_MOBILEVIEW.name + ' [INFO] getList - posting request ...');
 		var jqxhr = $.ajax({
 			url: wsURL,
 			beforeSend: function( xhr ){
@@ -80,10 +81,30 @@
 			dataType: "xml",
 			data: soapMessage,
 			contentType: "text/xml; charset=\"utf-8\"",
-			success: function(xml){console.log('...success');successFn(xml)},
-			error: function(error){console.log('...error!');errorFn(error);}
+			success: function(xml){
+				console.log(ITSM_MOBILEVIEW.name + ' [INFO]   ...success');
+				successFn(xml);},
+			error: function(error){
+				console.log(ITSM_MOBILEVIEW.name + ' [ERROR]   ...error!');
+				errorFn(error);}
 		});
 		return false;
 	},
+	extractUserInfo: function(xml) {
+		var userinfo;
+		console.log(ITSM_MOBILEVIEW.name + ' [INFO] extractUserInfo');
+		$(xml).find("ns0\\:getListValues").each(function()
+		{
+			userinfo = {
+				fullname: $(this).find("ns0\\:Full_Name").text(),
+				license_type: $(this).find("ns0\\:License_Type").text(),
+				email: $(this).find("ns0\\:Email_Address").text(),
+				groupids: $(this).find("ns0\\:Group_List").text()
+			};
+			console.log(ITSM_MOBILEVIEW.name + ' [INFO]   found user ' + userinfo.fullname);
+		});
+		return userinfo;
+	}
 }
-console.log('loaded ' + ITSM_MOBILEVIEW.name + ' namespace');
+console.log(ITSM_MOBILEVIEW.name + ' [INFO] namespace loaded');
+console.log(ITSM_MOBILEVIEW.name + ' [INFO]  context = ' + ITSM_MOBILEVIEW.context);

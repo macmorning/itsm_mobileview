@@ -20,6 +20,7 @@
 	function listIncidents()
 	{
 		console.log('listIncidents called');
+		$.mobile.loading('show');
 		ITSM_MOBILEVIEW.getList(
 				credentials,
 				'HPD_IncidentInterface_WS',
@@ -27,7 +28,6 @@
 				'\'Assignee Login ID\'="' + credentials.username + '" AND \'Status\'&lt;5',
 				function(request,status)
 				{
-					console.log('successListHPD_IncidentInterface_WS called');
 					$.mobile.loading('hide');
 					incidentsNumber = 0;
 					$(request).find("ns0\\:getListValues").each(function()
@@ -39,7 +39,6 @@
 				},
 				function(request,status,error)
 				{
-					console.log('errorListHPD_IncidentInterface_WS called');
 					$.mobile.loading('hide');
 					alert("error : " + error);
 				}
@@ -51,28 +50,20 @@
 			$("#login_submit").click(function(event) {
 				event.preventDefault();
 				credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
+				$.mobile.loading('show');
 				ITSM_MOBILEVIEW.getList(
 					credentials,
 					'User',
 					'OpGetList',
 					'\'Login Name\'="' + credentials.username + '" AND \'Status\'=0',
-					function(xml){
-							$(xml).find("ns0\\:getListValues").each(function()
-							{
-								userinfo = {
-									fullname: $(this).find("ns0\\:Full_Name").text(),
-									license_type: $(this).find("ns0\\:License_Type").text(),
-									email: $(this).find("ns0\\:Email_Address").text(),
-									groupids: $(this).find("ns0\\:Group_List").text()
-								};
-								console.log('successListUser found user ' + userinfo.fullname);
-								$("#homeName").html(userinfo.fullname);
-								listIncidents();
-							});
+					function(xml){			/* on successful login, get userinfo and switch to homepage */
+							userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
+							$("#homeName").html(userinfo.fullname);
+							listIncidents();
 							$.mobile.changePage($("#homepage"));
 							$.mobile.loading('hide');
 						},
-					function(error){
+					function(error){			/* on error, show error and stop */
 							$.mobile.loading('hide');
 							alert("Authentication error" + eval(error));
 						}
