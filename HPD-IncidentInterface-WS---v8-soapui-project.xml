@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="HPD_IncidentInterface_WS - v8" resourceRoot="${projectDir}" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="HPD_IncidentInterface_WSPortTypeSoapBinding" type="wsdl" bindingName="{urn:HPD_IncidentInterface_WS}HPD_IncidentInterface_WSPortTypeSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://ittux8:8080/arsys/WSDL/public/ittux8/HPD_IncidentInterface_WS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://ittux8:8080/arsys/WSDL/public/ittux8/HPD_IncidentInterface_WS"><con:part><con:url>http://ittux8:8080/arsys/WSDL/public/ittux8/HPD_IncidentInterface_WS</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="urn:HPD_IncidentInterface_WS" xmlns:ns0="http://tempuri.org" xmlns:s0="urn:HPD_IncidentInterface_WS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:HPD_IncidentInterface_WS">
+      <xsd:import namespace="http://tempuri.org"/>
+      <xsd:element name="HelpDesk_Query_Service" type="s0:GetInputMap"/>
+      <xsd:complexType name="GetInputMap">
+        <xsd:sequence>
+          <xsd:element name="Incident_Number" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="HelpDesk_Query_ServiceResponse" type="s0:GetOutputMap"/>
+      <xsd:complexType name="GetOutputMap">
+        <xsd:sequence>
+          <xsd:element name="Assigned_Group" type="xsd:string"/>
+          <xsd:element name="Assigned_Group_Shift_Name" type="xsd:string"/>
+          <xsd:element name="Assigned_Support_Company" type="xsd:string"/>
+          <xsd:element name="Assigned_Support_Organization" type="xsd:string"/>
+          <xsd:element name="Assignee" type="xsd:string"/>
+          <xsd:element name="Categorization_Tier_1" type="xsd:string"/>
+          <xsd:element name="Categorization_Tier_2" type="xsd:string"/>
+          <xsd:element name="Categorization_Tier_3" type="xsd:string"/>
+          <xsd:element name="City" type="xsd:string"/>
+          <xsd:element name="Closure_Manufacturer" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Category_Tier1" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Category_Tier2" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Category_Tier3" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Model_Version" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Name" type="xsd:string"/>
+          <xsd:element name="Company" type="xsd:string"/>
+          <xsd:element name="Contact_Company" type="xsd:string"/>
+          <xsd:element name="Contact_Sensitivity" nillable="true" type="s0:Contact_SensitivityType"/>
+          <xsd:element name="Country" type="xsd:string"/>
+          <xsd:element name="Department" type="xsd:string"/>
+          <xsd:element name="Summary" type="xsd:string"/>
+          <xsd:element name="Notes" type="xsd:string"/>
+          <xsd:element name="First_Name" type="xsd:string"/>
+          <xsd:element name="Impact" nillable="true" type="s0:ImpactType"/>
+          <xsd:element name="Last_Name" type="xsd:string"/>
+          <xsd:element name="Manufacturer" type="xsd:string"/>
+          <xsd:element name="Middle_Initial" type="xsd:string"/>
+          <xsd:element name="Organization" type="xsd:string"/>
+          <xsd:element name="Phone_Number" type="xsd:string"/>
+          <xsd:element name="Priority" nillable="true" type="s0:PriorityType"/>
+          <xsd:element name="Priority_Weight" nillable="true" type="xsd:int"/>
+          <xsd:element name="Product_Categorization_Tier_1" type="xsd:string"/>
+          <xsd:element name="Product_Categorization_Tier_2" type="xsd:string"/>
+          <xsd:element name="Product_Categorization_Tier_3" type="xsd:string"/>
+          <xsd:element name="Product_Model_Version" type="xsd:string"/>
+          <xsd:element name="Product_Name" type="xsd:string"/>
+          <xsd:element name="Region" type="xsd:string"/>
+          <xsd:element name="Reported_Source" nillable="true" type="s0:Reported_SourceType"/>
+          <xsd:element name="Resolution" type="xsd:string"/>
+          <xsd:element name="Resolution_Category" type="xsd:string"/>
+          <xsd:element name="Resolution_Category_Tier_2" type="xsd:string"/>
+          <xsd:element name="Resolution_Category_Tier_3" type="xsd:string"/>
+          <xsd:element name="Service_Type" nillable="true" type="s0:Service_TypeType"/>
+          <xsd:element name="Site" type="xsd:string"/>
+          <xsd:element name="Site_Group" type="xsd:string"/>
+          <xsd:element name="Status" type="s0:StatusType"/>
+          <xsd:element minOccurs="0" name="Status_Reason" nillable="true" type="s0:Status_ReasonType"/>
+          <xsd:element name="Urgency" nillable="true" type="s0:UrgencyType"/>
+          <xsd:element name="VIP" nillable="true" type="s0:VIPType"/>
+          <xsd:element name="ServiceCI" type="xsd:string"/>
+          <xsd:element name="ServiceCI_ReconID" type="xsd:string"/>
+          <xsd:element name="HPD_CI" type="xsd:string"/>
+          <xsd:element name="HPD_CI_ReconID" type="xsd:string"/>
+          <xsd:element name="HPD_CI_FormName" type="xsd:string"/>
+          <xsd:element name="z1D_CI_FormName" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Contact_SensitivityType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Sensitive"/>
+          <xsd:enumeration value="Standard"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ImpactType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="1-Extensive/Widespread"/>
+          <xsd:enumeration value="2-Significant/Large"/>
+          <xsd:enumeration value="3-Moderate/Limited"/>
+          <xsd:enumeration value="4-Minor/Localized"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="PriorityType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Critical"/>
+          <xsd:enumeration value="High"/>
+          <xsd:enumeration value="Medium"/>
+          <xsd:enumeration value="Low"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Reported_SourceType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Direct Input"/>
+          <xsd:enumeration value="Email"/>
+          <xsd:enumeration value="External Escalation"/>
+          <xsd:enumeration value="Fax"/>
+          <xsd:enumeration value="Self Service"/>
+          <xsd:enumeration value="Systems Management"/>
+          <xsd:enumeration value="Phone"/>
+          <xsd:enumeration value="Voice Mail"/>
+          <xsd:enumeration value="Walk In"/>
+          <xsd:enumeration value="Web"/>
+          <xsd:enumeration value="Other"/>
+          <xsd:enumeration value="BMC Impact Manager Event"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Service_TypeType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="User Service Restoration"/>
+          <xsd:enumeration value="User Service Request"/>
+          <xsd:enumeration value="Infrastructure Restoration"/>
+          <xsd:enumeration value="Infrastructure Event"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="StatusType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="New"/>
+          <xsd:enumeration value="Assigned"/>
+          <xsd:enumeration value="In Progress"/>
+          <xsd:enumeration value="Pending"/>
+          <xsd:enumeration value="Resolved"/>
+          <xsd:enumeration value="Closed"/>
+          <xsd:enumeration value="Cancelled"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Status_ReasonType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Infrastructure Change Created"/>
+          <xsd:enumeration value="Local Site Action Required"/>
+          <xsd:enumeration value="Purchase Order Approval"/>
+          <xsd:enumeration value="Registration Approval"/>
+          <xsd:enumeration value="Supplier Delivery"/>
+          <xsd:enumeration value="Support Contact Hold"/>
+          <xsd:enumeration value="Third Party Vendor Action Reqd"/>
+          <xsd:enumeration value="Client Action Required"/>
+          <xsd:enumeration value="Infrastructure Change"/>
+          <xsd:enumeration value="Request"/>
+          <xsd:enumeration value="Future Enhancement"/>
+          <xsd:enumeration value="Pending Original Incident"/>
+          <xsd:enumeration value="Client Hold"/>
+          <xsd:enumeration value="Monitoring Incident"/>
+          <xsd:enumeration value="Customer Follow-Up Required"/>
+          <xsd:enumeration value="Temporary Corrective Action"/>
+          <xsd:enumeration value="No Further Action Required"/>
+          <xsd:enumeration value="Resolved by Original Incident"/>
+          <xsd:enumeration value="Automated Resolution Reported"/>
+          <xsd:enumeration value="No longer a Causal CI"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="UrgencyType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="1-Critical"/>
+          <xsd:enumeration value="2-High"/>
+          <xsd:enumeration value="3-Medium"/>
+          <xsd:enumeration value="4-Low"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="VIPType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Yes"/>
+          <xsd:enumeration value="No"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="HelpDesk_QueryList_Service" type="s0:GetListInputMap"/>
+      <xsd:complexType name="GetListInputMap">
+        <xsd:sequence>
+          <xsd:element name="Qualification" type="xsd:string"/>
+          <xsd:element name="startRecord" type="xsd:string"/>
+          <xsd:element name="maxLimit" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="HelpDesk_QueryList_ServiceResponse" type="s0:GetListOutputMap"/>
+      <xsd:complexType name="GetListOutputMap">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="getListValues" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="HelpDesk_Modify_Service" type="s0:SetInputMap"/>
+      <xsd:complexType name="SetInputMap">
+        <xsd:sequence>
+          <xsd:element name="Categorization_Tier_1" type="xsd:string"/>
+          <xsd:element name="Categorization_Tier_2" type="xsd:string"/>
+          <xsd:element name="Categorization_Tier_3" type="xsd:string"/>
+          <xsd:element name="Closure_Manufacturer" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Category_Tier1" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Category_Tier2" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Category_Tier3" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Model_Version" type="xsd:string"/>
+          <xsd:element name="Closure_Product_Name" type="xsd:string"/>
+          <xsd:element name="Company" type="xsd:string"/>
+          <xsd:element name="Summary" type="xsd:string"/>
+          <xsd:element name="Notes" type="xsd:string"/>
+          <xsd:element name="Impact" type="s0:ImpactType"/>
+          <xsd:element name="Manufacturer" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="Product_Categorization_Tier_1" type="xsd:string"/>
+          <xsd:element name="Product_Categorization_Tier_2" type="xsd:string"/>
+          <xsd:element name="Product_Categorization_Tier_3" type="xsd:string"/>
+          <xsd:element name="Product_Model_Version" type="xsd:string"/>
+          <xsd:element name="Product_Name" type="xsd:string"/>
+          <xsd:element name="Reported_Source" type="s0:Reported_SourceType"/>
+          <xsd:element name="Resolution" type="xsd:string"/>
+          <xsd:element name="Resolution_Category" type="xsd:string"/>
+          <xsd:element name="Resolution_Category_Tier_2" type="xsd:string"/>
+          <xsd:element name="Resolution_Category_Tier_3" type="xsd:string"/>
+          <xsd:element name="Resolution_Method" type="xsd:string"/>
+          <xsd:element name="Service_Type" type="s0:Service_TypeType"/>
+          <xsd:element name="Status" type="s0:StatusType"/>
+          <xsd:element name="Urgency" type="s0:UrgencyType"/>
+          <xsd:element name="Action" type="xsd:string"/>
+          <xsd:element name="Work_Info_Summary" type="xsd:string"/>
+          <xsd:element name="Work_Info_Notes" type="xsd:string"/>
+          <xsd:element name="Work_Info_Type" type="s0:Work_Info_TypeType"/>
+          <xsd:element name="Work_Info_Date" type="xsd:dateTime"/>
+          <xsd:element name="Work_Info_Source" type="s0:Work_Info_SourceType"/>
+          <xsd:element name="Work_Info_Locked" type="s0:VIPType"/>
+          <xsd:element name="Work_Info_View_Access" type="s0:Work_Info_View_AccessType"/>
+          <xsd:element name="Incident_Number" type="xsd:string"/>
+          <xsd:element default="Infrastructure Change Created" minOccurs="0" name="Status_Reason" nillable="true" type="s0:Status_ReasonType"/>
+          <xsd:element name="ServiceCI" type="xsd:string"/>
+          <xsd:element name="ServiceCI_ReconID" type="xsd:string"/>
+          <xsd:element name="HPD_CI" type="xsd:string"/>
+          <xsd:element name="HPD_CI_ReconID" type="xsd:string"/>
+          <xsd:element name="HPD_CI_FormName" type="xsd:string"/>
+          <xsd:element name="z1D_CI_FormName" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="WorkInfoAttachment1Name" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="WorkInfoAttachment1Data" type="xsd:base64Binary"/>
+          <xsd:element minOccurs="0" name="WorkInfoAttachment1OrigSize" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Work_Info_TypeType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="----- Customer Inbound -----"/>
+          <xsd:enumeration value="Customer Communication"/>
+          <xsd:enumeration value="Customer Follow-up"/>
+          <xsd:enumeration value="Customer Status Update"/>
+          <xsd:enumeration value="----- Customer Outbound -----"/>
+          <xsd:enumeration value="Closure Follow Up"/>
+          <xsd:enumeration value="Detail Clarification"/>
+          <xsd:enumeration value="General Information"/>
+          <xsd:enumeration value="Resolution Communications"/>
+          <xsd:enumeration value="Satisfaction Survey"/>
+          <xsd:enumeration value="Status Update"/>
+          <xsd:enumeration value="----- General -----"/>
+          <xsd:enumeration value="Incident Task / Action"/>
+          <xsd:enumeration value="Problem Script"/>
+          <xsd:enumeration value="Working Log"/>
+          <xsd:enumeration value="Email System"/>
+          <xsd:enumeration value="Paging System"/>
+          <xsd:enumeration value="BMC Impact Manager Update"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Work_Info_SourceType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Email"/>
+          <xsd:enumeration value="Fax"/>
+          <xsd:enumeration value="Phone"/>
+          <xsd:enumeration value="Voice Mail"/>
+          <xsd:enumeration value="Walk In"/>
+          <xsd:enumeration value="Pager"/>
+          <xsd:enumeration value="System Assignment"/>
+          <xsd:enumeration value="Web"/>
+          <xsd:enumeration value="Other"/>
+          <xsd:enumeration value="BMC Impact Manager Event"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Work_Info_View_AccessType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Internal"/>
+          <xsd:enumeration value="Public"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="HelpDesk_Modify_ServiceResponse" type="s0:SetOutputMap"/>
+      <xsd:complexType name="SetOutputMap">
+        <xsd:sequence/>
+      </xsd:complexType>
+      <xsd:element name="HelpDesk_GetWorkInfoList" type="s0:InputMapping4"/>
+      <xsd:complexType name="InputMapping4">
+        <xsd:sequence>
+          <xsd:element name="Qualification" type="xsd:string"/>
+          <xsd:element name="startRecord" type="xsd:string"/>
+          <xsd:element name="maxLimit" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="HelpDesk_GetWorkInfoListResponse" type="s0:OutputMapping4"/>
+      <xsd:complexType name="OutputMapping4">
+        <xsd:sequence>
+          <xsd:element name="ListWOQuery" type="s0:ListWOObjectQuery"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ListWOObjectQuery">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="getListValues">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="WorkInfoInstanceID" type="xsd:string"/>
+                <xsd:element name="WorkInfoStatus" type="xsd:string"/>
+                <xsd:element name="WorkInfoType" type="xsd:string"/>
+                <xsd:element name="WorkInfoCommSource" type="xsd:string"/>
+                <xsd:element name="WorkInfoSummary" type="xsd:string"/>
+                <xsd:element name="WorkInfoNotes" type="xsd:string"/>
+                <xsd:element name="ParentID" type="xsd:string"/>
+                <xsd:element name="WorkInfoSecureLog" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="WorkInfoSubmitDate" type="xsd:dateTime"/>
+                <xsd:element name="WorkInfoAttachment1Name" type="xsd:string"/>
+                <xsd:element name="WorkInfoAttachment1Data" type="xsd:base64Binary"/>
+                <xsd:element name="WorkInfoAttachment1OrigSize" type="xsd:int"/>
+                <xsd:element name="WorkInfoAttachment2Name" type="xsd:string"/>
+                <xsd:element name="WorkInfoAttachment2Data" type="xsd:base64Binary"/>
+                <xsd:element name="WorkInfoAttachment2OrigSize" type="xsd:int"/>
+                <xsd:element name="WorkInfoAttachment3Name" type="xsd:string"/>
+                <xsd:element name="WorkInfoAttachment3Data" type="xsd:base64Binary"/>
+                <xsd:element name="WorkInfoAttachment3OrigSize" type="xsd:int"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="AuthenticationInfo" type="s0:AuthenticationInfo"/>
+      <xsd:complexType name="AuthenticationInfo">
+        <xsd:sequence>
+          <xsd:element name="userName" type="xsd:string"/>
+          <xsd:element name="password" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="authentication" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="locale" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="timeZone" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org" xmlns="http://tempuri.org" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ListQueryWorkInfo">
+        <xs:sequence>
+          <xs:element ref="ListWOQuery"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ListWOQuery" type="ListWOObjectQuery"/>
+      <xs:complexType name="ListWOObjectQuery">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="getListValues">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="WorkInfoInstanceID" type="xs:string"/>
+                <xs:element name="WorkInfoStatus" type="xs:string"/>
+                <xs:element name="WorkInfoType" type="xs:string"/>
+                <xs:element name="WorkInfoCommSource" type="xs:string"/>
+                <xs:element name="WorkInfoSummary" type="xs:string"/>
+                <xs:element name="WorkInfoNotes" type="xs:string"/>
+                <xs:element name="IncidentNumber" type="xs:string"/>
+                <xs:element name="WorkInfoSecureLog" type="xs:string"/>
+                <xs:element name="WorkInfoSubmitDate" type="xs:dateTime"/>
+                <xs:element name="WorkInfoAttachment1Name" type="xs:string"/>
+                <xs:element name="WorkInfoAttachment1Data" type="xs:base64Binary"/>
+                <xs:element name="WorkInfoAttachment1OrigSize" type="xs:int"/>
+                <xs:element name="WorkInfoAttachment2Name" type="xs:string"/>
+                <xs:element name="WorkInfoAttachment2Data" type="xs:base64Binary"/>
+                <xs:element name="WorkInfoAttachment2OrigSize" type="xs:int"/>
+                <xs:element name="WorkInfoAttachment3Name" type="xs:string"/>
+                <xs:element name="WorkInfoAttachment3Data" type="xs:base64Binary"/>
+                <xs:element name="WorkInfoAttachment3OrigSize" type="xs:int"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="HelpDesk_Query_ServiceSoapOut">
+    <wsdl:part element="s0:HelpDesk_Query_ServiceResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ARAuthenticate">
+    <wsdl:part element="s0:AuthenticationInfo" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_Modify_ServiceSoapOut">
+    <wsdl:part element="s0:HelpDesk_Modify_ServiceResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_GetWorkInfoListSoapIn">
+    <wsdl:part element="s0:HelpDesk_GetWorkInfoList" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_GetWorkInfoListSoapOut">
+    <wsdl:part element="s0:HelpDesk_GetWorkInfoListResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_Query_ServiceSoapIn">
+    <wsdl:part element="s0:HelpDesk_Query_Service" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_Modify_ServiceSoapIn">
+    <wsdl:part element="s0:HelpDesk_Modify_Service" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_QueryList_ServiceSoapOut">
+    <wsdl:part element="s0:HelpDesk_QueryList_ServiceResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HelpDesk_QueryList_ServiceSoapIn">
+    <wsdl:part element="s0:HelpDesk_QueryList_Service" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HPD_IncidentInterface_WSPortTypePortType">
+    <wsdl:operation name="HelpDesk_Query_Service">
+      <wsdl:input message="s0:HelpDesk_Query_ServiceSoapIn"></wsdl:input>
+      <wsdl:output message="s0:HelpDesk_Query_ServiceSoapOut"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelpDesk_QueryList_Service">
+      <wsdl:input message="s0:HelpDesk_QueryList_ServiceSoapIn"></wsdl:input>
+      <wsdl:output message="s0:HelpDesk_QueryList_ServiceSoapOut"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelpDesk_Modify_Service">
+      <wsdl:input message="s0:HelpDesk_Modify_ServiceSoapIn"></wsdl:input>
+      <wsdl:output message="s0:HelpDesk_Modify_ServiceSoapOut"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelpDesk_GetWorkInfoList">
+      <wsdl:input message="s0:HelpDesk_GetWorkInfoListSoapIn"></wsdl:input>
+      <wsdl:output message="s0:HelpDesk_GetWorkInfoListSoapOut"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HPD_IncidentInterface_WSPortTypeSoapBinding" type="s0:HPD_IncidentInterface_WSPortTypePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HelpDesk_Query_Service">
+      <soap:operation soapAction="urn:HPD_IncidentInterface_WS/HelpDesk_Query_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelpDesk_QueryList_Service">
+      <soap:operation soapAction="urn:HPD_IncidentInterface_WS/HelpDesk_QueryList_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelpDesk_Modify_Service">
+      <soap:operation soapAction="urn:HPD_IncidentInterface_WS/HelpDesk_Modify_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelpDesk_GetWorkInfoList">
+      <soap:operation soapAction="urn:HPD_IncidentInterface_WS/HelpDesk_GetWorkInfoList" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HPD_IncidentInterface_WSService">
+    <wsdl:documentation>Query and Modify Operations</wsdl:documentation>
+    <wsdl:port binding="s0:HPD_IncidentInterface_WSPortTypeSoapBinding" name="HPD_IncidentInterface_WSPortTypeSoap">
+      <soap:address location="http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS</con:endpoint><con:endpoint>http://FR001453:8088/mockHPD_IncidentInterface_WSPortTypeSoapBinding</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:HPD_IncidentInterface_WS/HelpDesk_GetWorkInfoList" name="HelpDesk_GetWorkInfoList" bindingOperationName="HelpDesk_GetWorkInfoList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>?</urn:userName>
+         <urn:password>?</urn:password>
+         <!--Optional:-->
+         <urn:authentication>?</urn:authentication>
+         <!--Optional:-->
+         <urn:locale>?</urn:locale>
+         <!--Optional:-->
+         <urn:timeZone>?</urn:timeZone>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:HelpDesk_GetWorkInfoList>
+         <urn:Qualification>?</urn:Qualification>
+         <urn:startRecord>?</urn:startRecord>
+         <urn:maxLimit>?</urn:maxLimit>
+      </urn:HelpDesk_GetWorkInfoList>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_GetWorkInfoList"/></con:call></con:operation><con:operation isOneWay="false" action="urn:HPD_IncidentInterface_WS/HelpDesk_Modify_Service" name="HelpDesk_Modify_Service" bindingOperationName="HelpDesk_Modify_Service" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>?</urn:userName>
+         <urn:password>?</urn:password>
+         <!--Optional:-->
+         <urn:authentication>?</urn:authentication>
+         <!--Optional:-->
+         <urn:locale>?</urn:locale>
+         <!--Optional:-->
+         <urn:timeZone>?</urn:timeZone>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:HelpDesk_Modify_Service>
+         <urn:Categorization_Tier_1>?</urn:Categorization_Tier_1>
+         <urn:Categorization_Tier_2>?</urn:Categorization_Tier_2>
+         <urn:Categorization_Tier_3>?</urn:Categorization_Tier_3>
+         <urn:Closure_Manufacturer>?</urn:Closure_Manufacturer>
+         <urn:Closure_Product_Category_Tier1>?</urn:Closure_Product_Category_Tier1>
+         <urn:Closure_Product_Category_Tier2>?</urn:Closure_Product_Category_Tier2>
+         <urn:Closure_Product_Category_Tier3>?</urn:Closure_Product_Category_Tier3>
+         <urn:Closure_Product_Model_Version>?</urn:Closure_Product_Model_Version>
+         <urn:Closure_Product_Name>?</urn:Closure_Product_Name>
+         <urn:Company>?</urn:Company>
+         <urn:Summary>?</urn:Summary>
+         <urn:Notes>?</urn:Notes>
+         <urn:Impact>?</urn:Impact>
+         <urn:Manufacturer>?</urn:Manufacturer>
+         <!--Optional:-->
+         <urn:Product_Categorization_Tier_1>?</urn:Product_Categorization_Tier_1>
+         <urn:Product_Categorization_Tier_2>?</urn:Product_Categorization_Tier_2>
+         <urn:Product_Categorization_Tier_3>?</urn:Product_Categorization_Tier_3>
+         <urn:Product_Model_Version>?</urn:Product_Model_Version>
+         <urn:Product_Name>?</urn:Product_Name>
+         <urn:Reported_Source>?</urn:Reported_Source>
+         <urn:Resolution>?</urn:Resolution>
+         <urn:Resolution_Category>?</urn:Resolution_Category>
+         <urn:Resolution_Category_Tier_2>?</urn:Resolution_Category_Tier_2>
+         <urn:Resolution_Category_Tier_3>?</urn:Resolution_Category_Tier_3>
+         <urn:Resolution_Method>?</urn:Resolution_Method>
+         <urn:Service_Type>?</urn:Service_Type>
+         <urn:Status>?</urn:Status>
+         <urn:Urgency>?</urn:Urgency>
+         <urn:Action>?</urn:Action>
+         <urn:Work_Info_Summary>?</urn:Work_Info_Summary>
+         <urn:Work_Info_Notes>?</urn:Work_Info_Notes>
+         <urn:Work_Info_Type>?</urn:Work_Info_Type>
+         <urn:Work_Info_Date>?</urn:Work_Info_Date>
+         <urn:Work_Info_Source>?</urn:Work_Info_Source>
+         <urn:Work_Info_Locked>?</urn:Work_Info_Locked>
+         <urn:Work_Info_View_Access>?</urn:Work_Info_View_Access>
+         <urn:Incident_Number>?</urn:Incident_Number>
+         <!--Optional:-->
+         <urn:Status_Reason>Infrastructure Change Created</urn:Status_Reason>
+         <urn:ServiceCI>?</urn:ServiceCI>
+         <urn:ServiceCI_ReconID>?</urn:ServiceCI_ReconID>
+         <urn:HPD_CI>?</urn:HPD_CI>
+         <urn:HPD_CI_ReconID>?</urn:HPD_CI_ReconID>
+         <urn:HPD_CI_FormName>?</urn:HPD_CI_FormName>
+         <urn:z1D_CI_FormName>?</urn:z1D_CI_FormName>
+         <!--Optional:-->
+         <urn:WorkInfoAttachment1Name>?</urn:WorkInfoAttachment1Name>
+         <!--Optional:-->
+         <urn:WorkInfoAttachment1Data>cid:1064850936984</urn:WorkInfoAttachment1Data>
+         <!--Optional:-->
+         <urn:WorkInfoAttachment1OrigSize>?</urn:WorkInfoAttachment1OrigSize>
+      </urn:HelpDesk_Modify_Service>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_Modify_Service"/></con:call></con:operation><con:operation isOneWay="false" action="urn:HPD_IncidentInterface_WS/HelpDesk_Query_Service" name="HelpDesk_Query_Service" bindingOperationName="HelpDesk_Query_Service" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>?</urn:userName>
+         <urn:password>?</urn:password>
+         <!--Optional:-->
+         <urn:authentication>?</urn:authentication>
+         <!--Optional:-->
+         <urn:locale>?</urn:locale>
+         <!--Optional:-->
+         <urn:timeZone>?</urn:timeZone>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:HelpDesk_Query_Service>
+         <urn:Incident_Number>?</urn:Incident_Number>
+      </urn:HelpDesk_Query_Service>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_Query_Service"/></con:call></con:operation><con:operation isOneWay="false" action="urn:HPD_IncidentInterface_WS/HelpDesk_QueryList_Service" name="HelpDesk_QueryList_Service" bindingOperationName="HelpDesk_QueryList_Service" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>ADMIN</urn:userName>
+         <urn:password>tagada</urn:password>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:HelpDesk_QueryList_Service>
+         <urn:Qualification>'Assignee Login ID'="Allen" AND 'Status'&lt;5</urn:Qualification>
+         <urn:startRecord>0</urn:startRecord>
+         <urn:maxLimit>5</urn:maxLimit>
+      </urn:HelpDesk_QueryList_Service>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_QueryList_Service"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=HPD_IncidentInterface_WS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+<soapenv:Header>
+<urn:AuthenticationInfo>
+<urn:userName>Allen</urn:userName>
+<urn:password></urn:password>
+</urn:AuthenticationInfo>
+</soapenv:Header>
+<soapenv:Body>
+<urn:HelpDesk_QueryList_Service>
+<urn:Qualification>'Assignee Login ID'="Allen" AND 'Status'&lt;5</urn:Qualification>
+<urn:startRecord>0</urn:startRecord>
+<urn:maxLimit>50</urn:maxLimit>
+</urn:OpGetList>
+</soapenv:Body>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_QueryList_Service"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="8088" path="/mockHPD_IncidentInterface_WSPortTypeSoapBinding" host="FR001453" name="HPD_IncidentInterface_WSPortTypeSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="HelpDesk_Query_Service" interface="HPD_IncidentInterface_WSPortTypeSoapBinding" operation="HelpDesk_Query_Service"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:HelpDesk_Query_ServiceResponse>
+         <urn:Assigned_Group>?</urn:Assigned_Group>
+         <urn:Assigned_Group_Shift_Name>?</urn:Assigned_Group_Shift_Name>
+         <urn:Assigned_Support_Company>?</urn:Assigned_Support_Company>
+         <urn:Assigned_Support_Organization>?</urn:Assigned_Support_Organization>
+         <urn:Assignee>?</urn:Assignee>
+         <urn:Categorization_Tier_1>?</urn:Categorization_Tier_1>
+         <urn:Categorization_Tier_2>?</urn:Categorization_Tier_2>
+         <urn:Categorization_Tier_3>?</urn:Categorization_Tier_3>
+         <urn:City>?</urn:City>
+         <urn:Closure_Manufacturer>?</urn:Closure_Manufacturer>
+         <urn:Closure_Product_Category_Tier1>?</urn:Closure_Product_Category_Tier1>
+         <urn:Closure_Product_Category_Tier2>?</urn:Closure_Product_Category_Tier2>
+         <urn:Closure_Product_Category_Tier3>?</urn:Closure_Product_Category_Tier3>
+         <urn:Closure_Product_Model_Version>?</urn:Closure_Product_Model_Version>
+         <urn:Closure_Product_Name>?</urn:Closure_Product_Name>
+         <urn:Company>?</urn:Company>
+         <urn:Contact_Company>?</urn:Contact_Company>
+         <urn:Contact_Sensitivity>?</urn:Contact_Sensitivity>
+         <urn:Country>?</urn:Country>
+         <urn:Department>?</urn:Department>
+         <urn:Summary>?</urn:Summary>
+         <urn:Notes>?</urn:Notes>
+         <urn:First_Name>?</urn:First_Name>
+         <urn:Impact>?</urn:Impact>
+         <urn:Last_Name>?</urn:Last_Name>
+         <urn:Manufacturer>?</urn:Manufacturer>
+         <urn:Middle_Initial>?</urn:Middle_Initial>
+         <urn:Organization>?</urn:Organization>
+         <urn:Phone_Number>?</urn:Phone_Number>
+         <urn:Priority>?</urn:Priority>
+         <urn:Priority_Weight>?</urn:Priority_Weight>
+         <urn:Product_Categorization_Tier_1>?</urn:Product_Categorization_Tier_1>
+         <urn:Product_Categorization_Tier_2>?</urn:Product_Categorization_Tier_2>
+         <urn:Product_Categorization_Tier_3>?</urn:Product_Categorization_Tier_3>
+         <urn:Product_Model_Version>?</urn:Product_Model_Version>
+         <urn:Product_Name>?</urn:Product_Name>
+         <urn:Region>?</urn:Region>
+         <urn:Reported_Source>?</urn:Reported_Source>
+         <urn:Resolution>?</urn:Resolution>
+         <urn:Resolution_Category>?</urn:Resolution_Category>
+         <urn:Resolution_Category_Tier_2>?</urn:Resolution_Category_Tier_2>
+         <urn:Resolution_Category_Tier_3>?</urn:Resolution_Category_Tier_3>
+         <urn:Service_Type>?</urn:Service_Type>
+         <urn:Site>?</urn:Site>
+         <urn:Site_Group>?</urn:Site_Group>
+         <urn:Status>?</urn:Status>
+         <!--Optional:-->
+         <urn:Status_Reason>?</urn:Status_Reason>
+         <urn:Urgency>?</urn:Urgency>
+         <urn:VIP>?</urn:VIP>
+         <urn:ServiceCI>?</urn:ServiceCI>
+         <urn:ServiceCI_ReconID>?</urn:ServiceCI_ReconID>
+         <urn:HPD_CI>?</urn:HPD_CI>
+         <urn:HPD_CI_ReconID>?</urn:HPD_CI_ReconID>
+         <urn:HPD_CI_FormName>?</urn:HPD_CI_FormName>
+         <urn:z1D_CI_FormName>?</urn:z1D_CI_FormName>
+      </urn:HelpDesk_Query_ServiceResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_Query_Service"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="HelpDesk_QueryList_Service" interface="HPD_IncidentInterface_WSPortTypeSoapBinding" operation="HelpDesk_QueryList_Service"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:HPD_IncidentInterface_WS">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:HelpDesk_QueryList_ServiceResponse>
+         <!--1 or more repetitions:-->
+         <urn:getListValues>?</urn:getListValues>
+      </urn:HelpDesk_QueryList_ServiceResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:HPD_IncidentInterface_WS/HelpDesk_QueryList_Service"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>

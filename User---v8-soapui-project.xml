@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="User - v8" resourceRoot="${projectDir}" soapui-version="4.5.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="UserSoapBinding" type="wsdl" bindingName="{urn:User}UserSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://ittux8:8080/arsys/WSDL/public/ittux8/User" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://ittux8:8080/arsys/WSDL/public/ittux8/User"><con:part><con:url>http://ittux8:8080/arsys/WSDL/public/ittux8/User</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="urn:User" xmlns:s0="urn:User" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:User">
+      <xsd:element name="OpGet" type="s0:GetInputMap"/>
+      <xsd:complexType name="GetInputMap">
+        <xsd:sequence>
+          <xsd:element name="Request_ID" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OpGetResponse" type="s0:GetOutputMap"/>
+      <xsd:complexType name="GetOutputMap">
+        <xsd:sequence>
+          <xsd:element name="Application_License" type="xsd:string"/>
+          <xsd:element name="Assigned_To" type="xsd:string"/>
+          <xsd:element name="Computed_Grp_List" type="xsd:string"/>
+          <xsd:element name="Create_Date" type="xsd:dateTime"/>
+          <xsd:element name="Creator" type="xsd:string"/>
+          <xsd:element name="Default_Notify_Mechanism" type="s0:Default_Notify_MechanismType"/>
+          <xsd:element name="Email_Address" type="xsd:string"/>
+          <xsd:element name="Full_Name" type="xsd:string"/>
+          <xsd:element name="Full_Text_License_Type" type="s0:Full_Text_License_TypeType"/>
+          <xsd:element name="Group_List" type="xsd:string"/>
+          <xsd:element name="Instance_ID" type="xsd:string"/>
+          <xsd:element name="Last_Modified_By" type="xsd:string"/>
+          <xsd:element name="License_Type" type="s0:License_TypeType"/>
+          <xsd:element name="Login_Name" type="xsd:string"/>
+          <xsd:element name="Modified_Date" type="xsd:dateTime"/>
+          <xsd:element name="Object_ID" type="xsd:string"/>
+          <xsd:element name="Password" type="xsd:string"/>
+          <xsd:element name="Request_ID" type="xsd:string"/>
+          <xsd:element name="Status" type="s0:StatusType"/>
+          <xsd:element name="Status_History" type="xsd:string"/>
+          <xsd:element name="Unique_Identifier" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Default_Notify_MechanismType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="None"/>
+          <xsd:enumeration value="Alert"/>
+          <xsd:enumeration value="Email"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Full_Text_License_TypeType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="None"/>
+          <xsd:enumeration value="Fixed"/>
+          <xsd:enumeration value="Floating"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="License_TypeType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Read"/>
+          <xsd:enumeration value="Fixed"/>
+          <xsd:enumeration value="Floating"/>
+          <xsd:enumeration value="Restricted Read"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="StatusType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Current"/>
+          <xsd:enumeration value="Disabled"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="OpCreate" type="s0:CreateInputMap"/>
+      <xsd:complexType name="CreateInputMap">
+        <xsd:sequence>
+          <xsd:element name="Application_License" type="xsd:string"/>
+          <xsd:element name="Assigned_To" type="xsd:string"/>
+          <xsd:element name="Computed_Grp_List" type="xsd:string"/>
+          <xsd:element name="Creator" type="xsd:string"/>
+          <xsd:element name="Default_Notify_Mechanism" type="s0:Default_Notify_MechanismType"/>
+          <xsd:element name="Email_Address" type="xsd:string"/>
+          <xsd:element name="Full_Name" type="xsd:string"/>
+          <xsd:element name="Full_Text_License_Type" type="s0:Full_Text_License_TypeType"/>
+          <xsd:element name="Group_List" type="xsd:string"/>
+          <xsd:element name="Instance_ID" type="xsd:string"/>
+          <xsd:element name="License_Type" type="s0:License_TypeType"/>
+          <xsd:element name="Login_Name" type="xsd:string"/>
+          <xsd:element name="Object_ID" type="xsd:string"/>
+          <xsd:element name="Password" type="xsd:string"/>
+          <xsd:element name="Status" type="s0:StatusType"/>
+          <xsd:element name="Unique_Identifier" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OpCreateResponse" type="s0:CreateOutputMap"/>
+      <xsd:complexType name="CreateOutputMap">
+        <xsd:sequence>
+          <xsd:element name="Request_ID" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OpGetList" type="s0:GetListInputMap"/>
+      <xsd:complexType name="GetListInputMap">
+        <xsd:sequence>
+          <xsd:element name="Qualification" type="xsd:string"/>
+          <xsd:element name="startRecord" type="xsd:string"/>
+          <xsd:element name="maxLimit" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OpGetListResponse" type="s0:GetListOutputMap"/>
+      <xsd:complexType name="GetListOutputMap">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="getListValues">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Application_License" type="xsd:string"/>
+                <xsd:element name="Assigned_To" type="xsd:string"/>
+                <xsd:element name="Computed_Grp_List" type="xsd:string"/>
+                <xsd:element name="Create_Date" type="xsd:dateTime"/>
+                <xsd:element name="Creator" type="xsd:string"/>
+                <xsd:element name="Default_Notify_Mechanism" type="s0:Default_Notify_MechanismType"/>
+                <xsd:element name="Email_Address" type="xsd:string"/>
+                <xsd:element name="Full_Name" type="xsd:string"/>
+                <xsd:element name="Full_Text_License_Type" type="s0:Full_Text_License_TypeType"/>
+                <xsd:element name="Group_List" type="xsd:string"/>
+                <xsd:element name="Instance_ID" type="xsd:string"/>
+                <xsd:element name="Last_Modified_By" type="xsd:string"/>
+                <xsd:element name="License_Type" type="s0:License_TypeType"/>
+                <xsd:element name="Login_Name" type="xsd:string"/>
+                <xsd:element name="Modified_Date" type="xsd:dateTime"/>
+                <xsd:element name="Object_ID" type="xsd:string"/>
+                <xsd:element name="Password" type="xsd:string"/>
+                <xsd:element name="Request_ID" type="xsd:string"/>
+                <xsd:element name="Status" type="s0:StatusType"/>
+                <xsd:element name="Status_History" type="xsd:string"/>
+                <xsd:element name="Unique_Identifier" type="xsd:string"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OpSet" type="s0:SetInputMap"/>
+      <xsd:complexType name="SetInputMap">
+        <xsd:sequence>
+          <xsd:element name="Application_License" type="xsd:string"/>
+          <xsd:element name="Assigned_To" type="xsd:string"/>
+          <xsd:element name="Computed_Grp_List" type="xsd:string"/>
+          <xsd:element name="Creator" type="xsd:string"/>
+          <xsd:element name="Default_Notify_Mechanism" type="s0:Default_Notify_MechanismType"/>
+          <xsd:element name="Email_Address" type="xsd:string"/>
+          <xsd:element name="Full_Name" type="xsd:string"/>
+          <xsd:element name="Full_Text_License_Type" type="s0:Full_Text_License_TypeType"/>
+          <xsd:element name="Group_List" type="xsd:string"/>
+          <xsd:element name="Instance_ID" type="xsd:string"/>
+          <xsd:element name="License_Type" type="s0:License_TypeType"/>
+          <xsd:element name="Login_Name" type="xsd:string"/>
+          <xsd:element name="Object_ID" type="xsd:string"/>
+          <xsd:element name="Password" type="xsd:string"/>
+          <xsd:element name="Status" type="s0:StatusType"/>
+          <xsd:element name="Unique_Identifier" type="xsd:string"/>
+          <xsd:element name="Request_ID" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="OpSetResponse" type="s0:SetOutputMap"/>
+      <xsd:complexType name="SetOutputMap">
+        <xsd:sequence/>
+      </xsd:complexType>
+      <xsd:element name="AuthenticationInfo" type="s0:AuthenticationInfo"/>
+      <xsd:complexType name="AuthenticationInfo">
+        <xsd:sequence>
+          <xsd:element name="userName" type="xsd:string"/>
+          <xsd:element name="password" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="authentication" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="locale" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="timeZone" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="OpCreateSoapOut">
+    <wsdl:part element="s0:OpCreateResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ARAuthenticate">
+    <wsdl:part element="s0:AuthenticationInfo" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpSetSoapOut">
+    <wsdl:part element="s0:OpSetResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpCreateSoapIn">
+    <wsdl:part element="s0:OpCreate" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpGetSoapOut">
+    <wsdl:part element="s0:OpGetResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpGetListSoapOut">
+    <wsdl:part element="s0:OpGetListResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpGetSoapIn">
+    <wsdl:part element="s0:OpGet" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpGetListSoapIn">
+    <wsdl:part element="s0:OpGetList" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="OpSetSoapIn">
+    <wsdl:part element="s0:OpSet" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="UserPortType">
+    <wsdl:operation name="OpGet">
+      <wsdl:input message="s0:OpGetSoapIn"/>
+      <wsdl:output message="s0:OpGetSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="OpCreate">
+      <wsdl:input message="s0:OpCreateSoapIn"/>
+      <wsdl:output message="s0:OpCreateSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="OpGetList">
+      <wsdl:input message="s0:OpGetListSoapIn"/>
+      <wsdl:output message="s0:OpGetListSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="OpSet">
+      <wsdl:input message="s0:OpSetSoapIn"/>
+      <wsdl:output message="s0:OpSetSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserSoapBinding" type="s0:UserPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="OpGet">
+      <soap:operation soapAction="urn:User/OpGet" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpCreate">
+      <soap:operation soapAction="urn:User/OpCreate" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpGetList">
+      <soap:operation soapAction="urn:User/OpGetList" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpSet">
+      <soap:operation soapAction="urn:User/OpSet" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"></soap:header>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port binding="s0:UserSoapBinding" name="UserSoap">
+      <soap:address location="http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=User"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=User</con:endpoint><con:endpoint>http://FR001453:8088/mockUserSoapBinding</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:User/OpCreate" name="OpCreate" bindingOperationName="OpCreate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=User</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:User">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>?</urn:userName>
+         <urn:password>?</urn:password>
+         <!--Optional:-->
+         <urn:authentication>?</urn:authentication>
+         <!--Optional:-->
+         <urn:locale>?</urn:locale>
+         <!--Optional:-->
+         <urn:timeZone>?</urn:timeZone>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:OpCreate>
+         <urn:Application_License>?</urn:Application_License>
+         <urn:Assigned_To>?</urn:Assigned_To>
+         <urn:Computed_Grp_List>?</urn:Computed_Grp_List>
+         <urn:Creator>?</urn:Creator>
+         <urn:Default_Notify_Mechanism>?</urn:Default_Notify_Mechanism>
+         <urn:Email_Address>?</urn:Email_Address>
+         <urn:Full_Name>?</urn:Full_Name>
+         <urn:Full_Text_License_Type>?</urn:Full_Text_License_Type>
+         <urn:Group_List>?</urn:Group_List>
+         <urn:Instance_ID>?</urn:Instance_ID>
+         <urn:License_Type>?</urn:License_Type>
+         <urn:Login_Name>?</urn:Login_Name>
+         <urn:Object_ID>?</urn:Object_ID>
+         <urn:Password>?</urn:Password>
+         <urn:Status>?</urn:Status>
+         <urn:Unique_Identifier>?</urn:Unique_Identifier>
+      </urn:OpCreate>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:User/OpCreate"/></con:call></con:operation><con:operation isOneWay="false" action="urn:User/OpGet" name="OpGet" bindingOperationName="OpGet" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=User</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:User">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>?</urn:userName>
+         <urn:password>?</urn:password>
+         <!--Optional:-->
+         <urn:authentication>?</urn:authentication>
+         <!--Optional:-->
+         <urn:locale>?</urn:locale>
+         <!--Optional:-->
+         <urn:timeZone>?</urn:timeZone>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:OpGet>
+         <urn:Request_ID>?</urn:Request_ID>
+      </urn:OpGet>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:User/OpGet"/></con:call></con:operation><con:operation isOneWay="false" action="urn:User/OpGetList" name="OpGetList" bindingOperationName="OpGetList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=User</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:User">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>ADMIN</urn:userName>
+         <urn:password>tagada</urn:password>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:OpGetList>
+         <urn:Qualification>'Login Name'="Allen" AND 'Status'=0</urn:Qualification>
+         <urn:startRecord>0</urn:startRecord>
+         <urn:maxLimit>1</urn:maxLimit>
+      </urn:OpGetList>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:User/OpGetList"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:User/OpSet" name="OpSet" bindingOperationName="OpSet" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=User</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:User">
+   <soapenv:Header>
+      <urn:AuthenticationInfo>
+         <urn:userName>?</urn:userName>
+         <urn:password>?</urn:password>
+         <!--Optional:-->
+         <urn:authentication>?</urn:authentication>
+         <!--Optional:-->
+         <urn:locale>?</urn:locale>
+         <!--Optional:-->
+         <urn:timeZone>?</urn:timeZone>
+      </urn:AuthenticationInfo>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:OpSet>
+         <urn:Application_License>?</urn:Application_License>
+         <urn:Assigned_To>?</urn:Assigned_To>
+         <urn:Computed_Grp_List>?</urn:Computed_Grp_List>
+         <urn:Creator>?</urn:Creator>
+         <urn:Default_Notify_Mechanism>?</urn:Default_Notify_Mechanism>
+         <urn:Email_Address>?</urn:Email_Address>
+         <urn:Full_Name>?</urn:Full_Name>
+         <urn:Full_Text_License_Type>?</urn:Full_Text_License_Type>
+         <urn:Group_List>?</urn:Group_List>
+         <urn:Instance_ID>?</urn:Instance_ID>
+         <urn:License_Type>?</urn:License_Type>
+         <urn:Login_Name>?</urn:Login_Name>
+         <urn:Object_ID>?</urn:Object_ID>
+         <urn:Password>?</urn:Password>
+         <urn:Status>?</urn:Status>
+         <urn:Unique_Identifier>?</urn:Unique_Identifier>
+         <urn:Request_ID>?</urn:Request_ID>
+      </urn:OpSet>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:User/OpSet"/></con:call></con:operation></con:interface><con:mockService port="8088" path="/mockUserSoapBinding" host="FR001453" name="UserSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="OpGet" interface="UserSoapBinding" operation="OpGet"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:User">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:OpGetResponse>
+         <urn:Application_License>?</urn:Application_License>
+         <urn:Assigned_To>?</urn:Assigned_To>
+         <urn:Computed_Grp_List>?</urn:Computed_Grp_List>
+         <urn:Create_Date>?</urn:Create_Date>
+         <urn:Creator>?</urn:Creator>
+         <urn:Default_Notify_Mechanism>?</urn:Default_Notify_Mechanism>
+         <urn:Email_Address>?</urn:Email_Address>
+         <urn:Full_Name>?</urn:Full_Name>
+         <urn:Full_Text_License_Type>?</urn:Full_Text_License_Type>
+         <urn:Group_List>?</urn:Group_List>
+         <urn:Instance_ID>?</urn:Instance_ID>
+         <urn:Last_Modified_By>?</urn:Last_Modified_By>
+         <urn:License_Type>?</urn:License_Type>
+         <urn:Login_Name>?</urn:Login_Name>
+         <urn:Modified_Date>?</urn:Modified_Date>
+         <urn:Object_ID>?</urn:Object_ID>
+         <urn:Password>?</urn:Password>
+         <urn:Request_ID>?</urn:Request_ID>
+         <urn:Status>?</urn:Status>
+         <urn:Status_History>?</urn:Status_History>
+         <urn:Unique_Identifier>?</urn:Unique_Identifier>
+      </urn:OpGetResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:User/OpGet"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="OpGetList" interface="UserSoapBinding" operation="OpGetList"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:User">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:OpGetListResponse>
+         <!--1 or more repetitions:-->
+         <urn:getListValues>
+            <urn:Application_License>?</urn:Application_License>
+            <urn:Assigned_To>?</urn:Assigned_To>
+            <urn:Computed_Grp_List>?</urn:Computed_Grp_List>
+            <urn:Create_Date>?</urn:Create_Date>
+            <urn:Creator>?</urn:Creator>
+            <urn:Default_Notify_Mechanism>?</urn:Default_Notify_Mechanism>
+            <urn:Email_Address>?</urn:Email_Address>
+            <urn:Full_Name>?</urn:Full_Name>
+            <urn:Full_Text_License_Type>?</urn:Full_Text_License_Type>
+            <urn:Group_List>?</urn:Group_List>
+            <urn:Instance_ID>?</urn:Instance_ID>
+            <urn:Last_Modified_By>?</urn:Last_Modified_By>
+            <urn:License_Type>?</urn:License_Type>
+            <urn:Login_Name>?</urn:Login_Name>
+            <urn:Modified_Date>?</urn:Modified_Date>
+            <urn:Object_ID>?</urn:Object_ID>
+            <urn:Password>?</urn:Password>
+            <urn:Request_ID>?</urn:Request_ID>
+            <urn:Status>?</urn:Status>
+            <urn:Status_History>?</urn:Status_History>
+            <urn:Unique_Identifier>?</urn:Unique_Identifier>
+         </urn:getListValues>
+      </urn:OpGetListResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:User/OpGetList"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
