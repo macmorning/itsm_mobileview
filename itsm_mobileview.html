@@ -12,11 +12,8 @@
 	<script>
 	var credentials;
 	var userinfo;
-	var incidentsNumber = 0;
-	var changesNumber = 0;
-	var tasksNumber = 0;
-	var approvalsNumber = 0;
-
+	var counters;
+	
 	function listIncidents()
 	{
 		console.log('listIncidents called');
@@ -51,19 +48,39 @@
 				event.preventDefault();
 				credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
 				$.mobile.loading('show');
-				ITSM_MOBILEVIEW.getList(
+				/*ITSM_MOBILEVIEW.getList(
 					credentials,
 					'User',
 					'OpGetList',
 					'\'Login Name\'="' + credentials.username + '" AND \'Status\'=0',
-					function(xml){			/* on successful login, get userinfo and switch to homepage */
+					function(xml){			-- on successful login, get userinfo and switch to homepage
 							userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
 							$("#homeName").html(userinfo.fullname);
 							listIncidents();
 							$.mobile.changePage($("#homepage"));
 							$.mobile.loading('hide');
 						},
-					function(error){			/* on error, show error and stop */
+					function(error){	-- on error, show error and stop
+							$.mobile.loading('hide');
+							alert("Authentication error" + eval(error));
+						}
+				);*/
+				ITSM_MOBILEVIEW.callService(
+					credentials,
+					'Connect',
+					function(xml){			// on successful login, get userinfo and switch to homepage
+							window.userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
+							window.counters = ITSM_MOBILEVIEW.extractCounters(xml);
+							$("#homeName").html(window.userinfo.fullname);
+							//listIncidents();
+							$("#incidentscount").text(window.counters.countIncidents);
+							$("#changescount").text(window.counters.countChanges);
+							$("#taskscount").text(window.counters.countTasks);
+							$("#signaturescount").text(window.counters.countSignatures);
+							$.mobile.changePage($("#homepage"));
+							$.mobile.loading('hide');
+						},
+					function(error){		// on error, show error and stop
 							$.mobile.loading('hide');
 							alert("Authentication error" + eval(error));
 						}
