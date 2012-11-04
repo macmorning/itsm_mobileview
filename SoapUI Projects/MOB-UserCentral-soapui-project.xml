@@ -122,23 +122,16 @@
          <urn:z1D_serviceName>Connect</urn:z1D_serviceName>
       </urn:Connect>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:MOB:UserCentral/Connect"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:MOB:UserCentral/RefreshCounters" name="RefreshCounters" bindingOperationName="RefreshCounters" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=MOB:UserCentral</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:MOB:UserCentral">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:MOB:UserCentral/Connect"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:MOB:UserCentral/RefreshCounters" name="RefreshCounters" bindingOperationName="RefreshCounters" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://ittux8:8080/arsys/services/ARService?server=ittux8&amp;webService=MOB:UserCentral</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:MOB:UserCentral">
    <soapenv:Header>
       <urn:AuthenticationInfo>
-         <urn:userName>?</urn:userName>
-         <urn:password>?</urn:password>
-         <!--Optional:-->
-         <urn:authentication>?</urn:authentication>
-         <!--Optional:-->
-         <urn:locale>?</urn:locale>
-         <!--Optional:-->
-         <urn:timeZone>?</urn:timeZone>
+         <urn:userName>Allen</urn:userName>
+         <urn:password></urn:password>
       </urn:AuthenticationInfo>
    </soapenv:Header>
    <soapenv:Body>
       <urn:RefreshCounters>
-         <!--Optional:-->
-         <urn:z1D_serviceName>?</urn:z1D_serviceName>
+         <urn:z1D_serviceName>RefreshCounters</urn:z1D_serviceName>
       </urn:RefreshCounters>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:MOB:UserCentral/RefreshCounters"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:MOB:UserCentral/RefreshCounters"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

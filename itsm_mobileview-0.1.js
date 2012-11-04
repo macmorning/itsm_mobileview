@@ -104,7 +104,7 @@
 	extractUserInfo: function(xml) {
 		var userinfo;
 		console.log(ITSM_MOBILEVIEW.name + ' [INFO] extractUserInfo');
-		$(xml).find("ns0\\:getListValues").each(function()
+		$(xml).find("ns0\\:ConnectResponse").each(function()
 		{
 			userinfo = {
 				fullname: $(this).find("ns0\\:fullName").text(),
@@ -119,7 +119,7 @@
 	extractCounters: function(xml) {
 		var counters;
 		console.log(ITSM_MOBILEVIEW.name + ' [INFO] extractCounters');
-		$(xml).find("ns0\\:getListValues").each(function()
+		$(xml).find("ns0\\:ConnectResponse").each(function()
 		{
 			counters = {
 				countIncidents: $(this).find("ns0\\:countIncidents").text(),

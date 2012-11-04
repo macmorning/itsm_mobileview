@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <!--<link rel="stylesheet" href="lib\jquery.mobile-1.2.0.min.css" />
@@ -7,13 +8,30 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="itsm_mobileview-0.1.js"></script>
 	<script>
-	var credentials;
-	var userinfo;
-	var counters;
-	
+	var localStorageKey = "ITSMMobileContext";
+	;CONTEXT = {
+		credentials: {
+			server:"",
+			username:"",
+			password:""
+		},
+		userinfo: {
+			fullname:"",
+			license_type:"",
+			email:"",
+			groups:""
+		},
+		counters: {
+			countIncidents:0,
+			countChanges:0,
+			countTasks:0,
+			countSignatures:0,
+		}
+	}
 	function listIncidents()
 	{
 		console.log('listIncidents called');
@@ -43,49 +61,37 @@
 	}
 
 	$(document).ready(function() {
+			if (Modernizr.localstorage) {
 			/* When user clicks "submit", get user's information via the getList function in the ITSM_MOBILEVIEW namespace */
-			$("#login_submit").click(function(event) {
-				event.preventDefault();
-				credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
-				$.mobile.loading('show');
-				/*ITSM_MOBILEVIEW.getList(
-					credentials,
-					'User',
-					'OpGetList',
-					'\'Login Name\'="' + credentials.username + '" AND \'Status\'=0',
-					function(xml){			-- on successful login, get userinfo and switch to homepage
-							userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
-							$("#homeName").html(userinfo.fullname);
-							listIncidents();
-							$.mobile.changePage($("#homepage"));
-							$.mobile.loading('hide');
+				$("#login_submit").click(function(event) {
+					event.preventDefault();
+					credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
+					$.mobile.loading('show');
+					ITSM_MOBILEVIEW.callService(
+						credentials,
+						'Connect',
+						function(xml){			// on successful login, get userinfo and switch to homepage
+								CONTEXT.userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
+								CONTEXT.counters = ITSM_MOBILEVIEW.extractCounters(xml);
+								$("#homeName").html(CONTEXT.userinfo["fullname"]);
+								$("#incidentscount").text(CONTEXT.counters["countIncidents"]);
+								$("#changescount").text(CONTEXT.counters["countChanges"]);
+								$("#taskscount").text(CONTEXT.counters["countTasks"]);
+								$("#signaturescount").text(CONTEXT.counters["countSignatures"]);
+								$.mobile.changePage($("#homepage"));
+								$.mobile.loading('hide');
+								localStorage.setItem(localStorageKey,CONTEXT);
 						},
-					function(error){	-- on error, show error and stop
-							$.mobile.loading('hide');
-							alert("Authentication error" + eval(error));
+						function(error){		// on error, show error and stop
+								$.mobile.loading('hide');
+								alert("Authentication error" + eval(error));
 						}
-				);*/
-				ITSM_MOBILEVIEW.callService(
-					credentials,
-					'Connect',
-					function(xml){			// on successful login, get userinfo and switch to homepage
-							window.userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
-							window.counters = ITSM_MOBILEVIEW.extractCounters(xml);
-							$("#homeName").html(window.userinfo.fullname);
-							//listIncidents();
-							$("#incidentscount").text(window.counters.countIncidents);
-							$("#changescount").text(window.counters.countChanges);
-							$("#taskscount").text(window.counters.countTasks);
-							$("#signaturescount").text(window.counters.countSignatures);
-							$.mobile.changePage($("#homepage"));
-							$.mobile.loading('hide');
-						},
-					function(error){		// on error, show error and stop
-							$.mobile.loading('hide');
-							alert("Authentication error" + eval(error));
-						}
-				);
-			});
+					);
+				});
+			}
+			else {
+				alert("Your browser cannot run this application.");
+			}
 		});
 	</script>
 </head>
