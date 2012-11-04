@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--<link rel="stylesheet" href="lib\jquery.mobile-1.2.0.min.css" />
-	<script src="lib\jquery.js"></script>
-	<script src="lib\jquery.mobile-1.2.0.min.js"></script>-->
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
+	<script src="lib/jquery-1.8.2.min.js"></script>
+	<script src="lib/jquery.mobile-1.2.0.min.js"></script>
+	<script type="text/javascript" src="lib/modernizr-latest.js"></script>
+	<!--
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
+	-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="itsm_mobileview-0.1.js"></script>
 	<script>
-	var localStorageKey = "ITSMMobileContext";
+	if ( ! window.console ) console = { log: function(){} };
+	var localStorageCredentials = "ITSMMobileContextCredentials";
+	var localStorageUserInfo = "ITSMMobileContextUserInfo";
+	var localStorageCounters = "ITSMMobileContextCounters";
 	;CONTEXT = {
 		credentials: {
 			server:"",
@@ -37,20 +43,19 @@
 		console.log('listIncidents called');
 		$.mobile.loading('show');
 		ITSM_MOBILEVIEW.getList(
-				credentials,
+				CONTEXT.credentials,
 				'HPD_IncidentInterface_WS',
 				'HelpDesk_QueryList_Service',
-				'\'Assignee Login ID\'="' + credentials.username + '" AND \'Status\'&lt;5',
+				'\'Assignee Login ID\'="' + CONTEXT.credentials.username + '" AND \'Status\'&lt;5',
 				function(request,status)
 				{
-					$.mobile.loading('hide');
-					incidentsNumber = 0;
 					$(request).find("ns0\\:getListValues").each(function()
 					{
-						incidentsNumber++;
 						$("#incidentslist").append('<li><a href="line1"><h1>'+$(this).find("ns0\\:Incident_Number").text()+'-'+$(this).find("ns0\\:Priority").text()+'</h1><p>'+$(this).find("ns0\\:Summary").text()+'</p></a></li>');
 					});
-					$("#incidentscount").text(incidentsNumber);
+					$.mobile.loading('hide');
+					$.mobile.changePage($("#incidentspage"));
+					$("#incidentslist").trigger('create');
 				},
 				function(request,status,error)
 				{
@@ -61,37 +66,39 @@
 	}
 
 	$(document).ready(function() {
-			if (Modernizr.localstorage) {
-			/* When user clicks "submit", get user's information via the getList function in the ITSM_MOBILEVIEW namespace */
-				$("#login_submit").click(function(event) {
-					event.preventDefault();
-					credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
-					$.mobile.loading('show');
-					ITSM_MOBILEVIEW.callService(
-						credentials,
-						'Connect',
-						function(xml){			// on successful login, get userinfo and switch to homepage
-								CONTEXT.userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
-								CONTEXT.counters = ITSM_MOBILEVIEW.extractCounters(xml);
-								$("#homeName").html(CONTEXT.userinfo["fullname"]);
-								$("#incidentscount").text(CONTEXT.counters["countIncidents"]);
-								$("#changescount").text(CONTEXT.counters["countChanges"]);
-								$("#taskscount").text(CONTEXT.counters["countTasks"]);
-								$("#signaturescount").text(CONTEXT.counters["countSignatures"]);
-								$.mobile.changePage($("#homepage"));
-								$.mobile.loading('hide');
-								localStorage.setItem(localStorageKey,CONTEXT);
-						},
-						function(error){		// on error, show error and stop
-								$.mobile.loading('hide');
-								alert("Authentication error" + eval(error));
-						}
-					);
-				});
-			}
-			else {
+			// check if the browser can use localStorage
+			if (!Modernizr.localstorage) {
 				alert("Your browser cannot run this application.");
+				return false;
 			}
+			// When user clicks "submit", get user's information via the getList function in the ITSM_MOBILEVIEW namespace
+			$("#login_submit").click(function(event) {
+				event.preventDefault();
+				CONTEXT.credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
+				localStorage.setItem(localStorageCredentials,JSON.stringify(CONTEXT.credentials));
+				$.mobile.loading('show');
+				ITSM_MOBILEVIEW.callService(
+					CONTEXT.credentials,
+					'Connect',
+					function(xml){			// on successful login, get userinfo and switch to homepage
+							CONTEXT.userinfo = ITSM_MOBILEVIEW.extractUserInfo(xml);
+							CONTEXT.counters = ITSM_MOBILEVIEW.extractCounters(xml);
+							$("#homeName").html(CONTEXT.userinfo["fullname"]);
+							$("#incidentscount").text(CONTEXT.counters["countIncidents"]);
+							$("#changescount").text(CONTEXT.counters["countChanges"]);
+							$("#taskscount").text(CONTEXT.counters["countTasks"]);
+							$("#signaturescount").text(CONTEXT.counters["countSignatures"]);
+							$.mobile.changePage($("#homepage"));
+							$.mobile.loading('hide');
+							localStorage.setItem(localStorageUserInfo,JSON.stringify(CONTEXT.userinfo));
+							localStorage.setItem(localStorageCounters,JSON.stringify(CONTEXT.counters));
+					},
+					function(error){		// on error, show error and stop
+							$.mobile.loading('hide');
+							alert("Authentication error" + eval(error));
+					}
+				);
+			});
 		});
 	</script>
 </head>
@@ -103,7 +110,7 @@
 	</header>
 	<form method="POST" action="" data-ajax="false">
 		<label for="login_server">Server:</label>
-		<input type="text" name="login_server" id="login_server" value="ittux8"/>
+		<input type="text" name="login_server" id="login_server"/>
 		<label for="login_username">Username:</label>
 		<input type="text" name="login_username" id="login_username" />
 		<label for="login_password">Password:</label>
@@ -121,7 +128,7 @@
 	</header>
 	<p style="text-align:center;" id="homeName"></p>
 	<ul data-role="listview">
-		<li><a href="#incidentspage">Incidents <span id="incidentscount" class="ui-li-count"></span></a></li>
+		<li><a href="#" onclick="listIncidents()">Incidents <span id="incidentscount" class="ui-li-count"></span></a></li>
 		<li><a href="#changespage">Changes <span class="ui-li-count"></span></a></li>
 		<li><a href="#taskspage">Tasks <span class="ui-li-count"></span></a></li>
 		<li><a href="#approvalspages">Approvals <span class="ui-li-count"></span></a></li>
@@ -137,6 +144,7 @@
 	<article data-role="content">
 		<ul data-role="listview" data-filter="true" id="incidentslist">
 			<!-- incidents come here in <li> elements -->
+			<li><a href="#">dummy</a></li>
 		</ul>
 	</article>
 	<footer data-role="footer" data-position="fixed">
@@ -144,7 +152,7 @@
 			<ul>
 				<li><a href="#homepage" data-icon="home" data-iconpos="notext">Home</a></li>
 				<li><a href="#" data-icon="info">Info</a></li>
-				<li><a href="#" data-icon="refresh">Refresh</a></li>				
+				<li><a href="#" onclick="listIncidents()" data-icon="refresh">Refresh</a></li>				
 			</ul>
 		</nav>
 	</footer>

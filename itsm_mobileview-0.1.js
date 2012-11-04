@@ -136,5 +136,6 @@
 		return counters;
 	}
 }
+if ( ! window.console ) console = { log: function(){} };
 console.log(ITSM_MOBILEVIEW.name + ' [INFO] namespace loaded');
 console.log(ITSM_MOBILEVIEW.name + ' [INFO]  context = ' + ITSM_MOBILEVIEW.context);
