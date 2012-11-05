@@ -2,16 +2,18 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<!-- Uncomment if using offline libraries
 	<link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
 	<script src="lib/jquery-1.8.2.min.js"></script>
 	<script src="lib/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="lib/modernizr-latest.js"></script>
-	<!--
+	-->
+	<!-- Comment if using offline libraries -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="http://www.modernizr.com/downloads/modernizr-latest.js"></script>
-	-->
+	<!-- -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="itsm_mobileview-0.1.js"></script>
 	<script>
@@ -35,13 +37,48 @@
 			countIncidents:0,
 			countChanges:0,
 			countTasks:0,
-			countSignatures:0,
-		}
+			countApprovals:0,
+		},
+		incidents : {},
+		changes : {},
+		tasks : {},
+		approvals : {}
+	}
+	
+	
+	function showIncident(id)
+	{
+		$('#incident_id').text(CONTEXT.incidents[id].number);
+		$('#incident_summary').val(CONTEXT.incidents[id].summary);
+		$('#incident_priority').val(CONTEXT.incidents[id].priority);
+		$('#incident_status').val(CONTEXT.incidents[id].status);
+		$('#incident_assignedSG').val(CONTEXT.incidents[id].assignedSG);
+		ITSM_MOBILEVIEW.getList(
+			CONTEXT.credentials,
+			'HPD_IncidentInterface_WS',
+			'HelpDesk_GetWorkInfoList',
+			'\'Incident Number\'="' + id + '"',
+			function(request,status)
+			{
+				$(request).find("ns0\\:getListValues").each(function()
+				{
+					return false; // to be completed
+				});
+			},
+			function(request,status,error)
+			{
+				$.mobile.loading('hide');
+				alert("error : " + error);
+			}
+		);
+		$.mobile.changePage($("#incidentpage"));
+		return true;
 	}
 	function listIncidents()
 	{
 		console.log('listIncidents called');
 		$.mobile.loading('show');
+		CONTEXT.incidents = {}; // init the incidents array
 		ITSM_MOBILEVIEW.getList(
 				CONTEXT.credentials,
 				'HPD_IncidentInterface_WS',
@@ -51,7 +88,39 @@
 				{
 					$(request).find("ns0\\:getListValues").each(function()
 					{
-						$("#incidentslist").append('<li><a href="line1"><h1>'+$(this).find("ns0\\:Incident_Number").text()+'-'+$(this).find("ns0\\:Priority").text()+'</h1><p>'+$(this).find("ns0\\:Summary").text()+'</p></a></li>');
+						var id = $(this).find("ns0\\:Incident_Number").text(); // get the incident number; will be used as a key for the context.incidents array
+						CONTEXT.incidents[id] = 
+												{
+													number : id,
+													status : $(this).find("ns0\\:Status").text(),
+													statusReason : $(this).find("ns0\\:Status_Reason").text(),
+													serviceType : $(this).find("ns0\\:Service_Type").text(),
+													assignedSGCompany : $(this).find("ns0\\:Assigned_Support_Company").text(),
+													assignedSGOrganization : $(this).find("ns0\\:Assigned_Support_Organization").text(),
+													assignedSG : $(this).find("ns0\\:Assigned_Group").text(),
+													summary : $(this).find("ns0\\:Summary").text(),
+													priority : $(this).find("ns0\\:Priority").text(),
+													categorization1 : $(this).find("ns0\\:Categorization_Tier_1").text(),
+													categorization2 : $(this).find("ns0\\:Categorization_Tier_2").text(),
+													categorization3 : $(this).find("ns0\\:Categorization_Tier_3").text(),
+													firstName : $(this).find("ns0\\:First_Name").text(),
+													lastName : $(this).find("ns0\\:Last_Name").text(),
+													vip : $(this).find("ns0\\:VIP").text(),
+													phone : $(this).find("ns0\\:Phone_Number").text(),
+													email : $(this).find("ns0\\:Internet_E-mail").text(),
+													region : $(this).find("ns0\\:Region").text(),
+													site : $(this).find("ns0\\:Site").text(),
+													reportedDate : $(this).find("ns0\\:Reported_Date").text(),
+													submitDate : $(this).find("ns0\\:Submit_Date").text()
+												};
+						$("#incidentslist").append('\
+							<li>\
+								<a href="#" onclick="showIncident(\'' + id + '\')">\
+									<h1>' + id + ' - ' + CONTEXT.incidents[id].priority + '</h1>\
+									<p><b>' + CONTEXT.incidents[id].status + "</b><br/>" +
+									CONTEXT.incidents[id].summary + '</p>\
+								</a>\
+							</li>');
 					});
 					$.mobile.loading('hide');
 					$.mobile.changePage($("#incidentspage"));
@@ -75,7 +144,7 @@
 			$("#login_submit").click(function(event) {
 				event.preventDefault();
 				CONTEXT.credentials = { server: $('#login_server').val(), username: $('#login_username').val(), password: $('#login_password').val() };
-				localStorage.setItem(localStorageCredentials,JSON.stringify(CONTEXT.credentials));
+				//localStorage.setItem(localStorageCredentials,JSON.stringify(CONTEXT.credentials));
 				$.mobile.loading('show');
 				ITSM_MOBILEVIEW.callService(
 					CONTEXT.credentials,
@@ -87,11 +156,11 @@
 							$("#incidentscount").text(CONTEXT.counters["countIncidents"]);
 							$("#changescount").text(CONTEXT.counters["countChanges"]);
 							$("#taskscount").text(CONTEXT.counters["countTasks"]);
-							$("#signaturescount").text(CONTEXT.counters["countSignatures"]);
+							$("#approvalscount").text(CONTEXT.counters["countApprovals"]);
 							$.mobile.changePage($("#homepage"));
 							$.mobile.loading('hide');
-							localStorage.setItem(localStorageUserInfo,JSON.stringify(CONTEXT.userinfo));
-							localStorage.setItem(localStorageCounters,JSON.stringify(CONTEXT.counters));
+							//localStorage.setItem(localStorageUserInfo,JSON.stringify(CONTEXT.userinfo));
+							//localStorage.setItem(localStorageCounters,JSON.stringify(CONTEXT.counters));
 					},
 					function(error){		// on error, show error and stop
 							$.mobile.loading('hide');
@@ -129,9 +198,9 @@
 	<p style="text-align:center;" id="homeName"></p>
 	<ul data-role="listview">
 		<li><a href="#" onclick="listIncidents()">Incidents <span id="incidentscount" class="ui-li-count"></span></a></li>
-		<li><a href="#changespage">Changes <span class="ui-li-count"></span></a></li>
-		<li><a href="#taskspage">Tasks <span class="ui-li-count"></span></a></li>
-		<li><a href="#approvalspages">Approvals <span class="ui-li-count"></span></a></li>
+		<li><a href="#changespage">Changes <span id="changescount" class="ui-li-count"></span></a></li>
+		<li><a href="#taskspage">Tasks <span id="taskscount" class="ui-li-count"></span></a></li>
+		<li><a href="#approvalspages">Approvals <span id="approvalscount" class="ui-li-count"></span></a></li>
 	</ul>
 </div>
 
@@ -144,7 +213,6 @@
 	<article data-role="content">
 		<ul data-role="listview" data-filter="true" id="incidentslist">
 			<!-- incidents come here in <li> elements -->
-			<li><a href="#">dummy</a></li>
 		</ul>
 	</article>
 	<footer data-role="footer" data-position="fixed">
@@ -153,6 +221,34 @@
 				<li><a href="#homepage" data-icon="home" data-iconpos="notext">Home</a></li>
 				<li><a href="#" data-icon="info">Info</a></li>
 				<li><a href="#" onclick="listIncidents()" data-icon="refresh">Refresh</a></li>				
+			</ul>
+		</nav>
+	</footer>
+</div>
+
+<!--############### Incident Detail ###############-->
+<div data-role="page" id="incidentpage">
+	<header data-role="header">
+		<h1 id="incident_id">Incident Detail</h1>
+		<a href="#incidentspage" data-icon="back" data-iconpos="notext">Previous</a>
+		<a href="#" data-icon="save" data-iconpos="notext">Save</a>
+	</header>
+	<form method="POST" action="" data-ajax="false">
+		<label for="incident_priority">Priority:</label>
+		<input type="text" name="incident_priority" id="incident_priority" />
+		<label for="incident_status">Status:</label>
+		<input type="text" name="incident_status" id="incident_status" />
+		<label for="incident_assignedSG">Assigned group:</label>
+		<input type="text" name="incident_assignedSG" id="incident_assignedSG" />
+		<label for="incident_summary">Summary:</label>
+		<textarea rows="3" name="incident_summary" id="incident_summary"/>
+	</form>	
+	<footer data-role="footer" data-position="fixed">
+		<nav data-role="navbar">
+			<ul>
+				<li><a href="#homepage" data-icon="home" data-iconpos="notext">Home</a></li>
+				<li><a href="#" data-icon="info">Info</a></li>
+				<li><a href="#" data-icon=""></a></li>				
 			</ul>
 		</nav>
 	</footer>

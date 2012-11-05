@@ -125,13 +125,13 @@
 				countIncidents: $(this).find("ns0\\:countIncidents").text(),
 				countChanges: $(this).find("ns0\\:countChanges").text(),
 				countTasks: $(this).find("ns0\\:countTasks").text(),
-				countSignatures: $(this).find("ns0\\:countSignatures").text()
+				countApprovals: $(this).find("ns0\\:countSignatures").text()
 			};
 			console.log(ITSM_MOBILEVIEW.name + ' [INFO]   found counters ' 
 				+ counters.countIncidents + "/" 
 				+ counters.countChanges + "/" 
 				+ counters.countTasks + "/" 
-				+ counters.countSignatures);
+				+ counters.countApprovals);
 		});
 		return counters;
 	}
