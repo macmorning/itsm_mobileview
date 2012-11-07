@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<!-- Uncomment if using offline libraries
+	<!-- Comment if using online libraries-->
 	<link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
 	<script src="lib/jquery-1.8.2.min.js"></script>
 	<script src="lib/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="lib/modernizr-latest.js"></script>
-	-->
-	<!-- Comment if using offline libraries -->
+	<!-- -->
+	<!-- Comment if using offline libraries
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -22,6 +22,10 @@
 	var localStorageUserInfo = "ITSMMobileContextUserInfo";
 	var localStorageCounters = "ITSMMobileContextCounters";
 	;CONTEXT = {
+		lasterror: {
+			code:"",
+			message:""
+		},
 		credentials: {
 			server:"",
 			username:"",
@@ -65,10 +69,11 @@
 					return false; // to be completed
 				});
 			},
-			function(request,status,error)
+			function(xml)
 			{
 				$.mobile.loading('hide');
-				alert("error : " + error);
+				CONTEXT.lasterror = ITSM_MOBILEVIEW.extractError(xml);
+				alert(CONTEXT.lasterror.message);
 			}
 		);
 		$.mobile.changePage($("#incidentpage"));
@@ -84,41 +89,15 @@
 				'HPD_IncidentInterface_WS',
 				'HelpDesk_QueryList_Service',
 				'\'Assignee Login ID\'="' + CONTEXT.credentials.username + '" AND \'Status\'&lt;5',
-				function(request,status)
-				{
-					$(request).find("ns0\\:getListValues").each(function()
-					{
-						var id = $(this).find("ns0\\:Incident_Number").text(); // get the incident number; will be used as a key for the context.incidents array
-						CONTEXT.incidents[id] = 
-												{
-													number : id,
-													status : $(this).find("ns0\\:Status").text(),
-													statusReason : $(this).find("ns0\\:Status_Reason").text(),
-													serviceType : $(this).find("ns0\\:Service_Type").text(),
-													assignedSGCompany : $(this).find("ns0\\:Assigned_Support_Company").text(),
-													assignedSGOrganization : $(this).find("ns0\\:Assigned_Support_Organization").text(),
-													assignedSG : $(this).find("ns0\\:Assigned_Group").text(),
-													summary : $(this).find("ns0\\:Summary").text(),
-													priority : $(this).find("ns0\\:Priority").text(),
-													categorization1 : $(this).find("ns0\\:Categorization_Tier_1").text(),
-													categorization2 : $(this).find("ns0\\:Categorization_Tier_2").text(),
-													categorization3 : $(this).find("ns0\\:Categorization_Tier_3").text(),
-													firstName : $(this).find("ns0\\:First_Name").text(),
-													lastName : $(this).find("ns0\\:Last_Name").text(),
-													vip : $(this).find("ns0\\:VIP").text(),
-													phone : $(this).find("ns0\\:Phone_Number").text(),
-													email : $(this).find("ns0\\:Internet_E-mail").text(),
-													region : $(this).find("ns0\\:Region").text(),
-													site : $(this).find("ns0\\:Site").text(),
-													reportedDate : $(this).find("ns0\\:Reported_Date").text(),
-													submitDate : $(this).find("ns0\\:Submit_Date").text()
-												};
+				function(xml) {
+					CONTEXT.incidents = ITSM_MOBILEVIEW.extractIncidents(xml);
+					$.each(CONTEXT.incidents,function(key,value) {
 						$("#incidentslist").append('\
 							<li>\
-								<a href="#" onclick="showIncident(\'' + id + '\')">\
-									<h1>' + id + ' - ' + CONTEXT.incidents[id].priority + '</h1>\
-									<p><b>' + CONTEXT.incidents[id].status + "</b><br/>" +
-									CONTEXT.incidents[id].summary + '</p>\
+								<a href="#" onclick="showIncident(\'' + key + '\')">\
+									<h1>' + key + ' - ' + value.priority + '</h1>\
+									<p><b>' + value.status + "</b><br/>" +
+									value.summary + '</p>\
 								</a>\
 							</li>');
 					});
@@ -126,10 +105,18 @@
 					$.mobile.changePage($("#incidentspage"));
 					$("#incidentslist").trigger('create');
 				},
-				function(request,status,error)
+				function(xml)
 				{
 					$.mobile.loading('hide');
-					alert("error : " + error);
+					CONTEXT.lasterror = ITSM_MOBILEVIEW.extractError(xml);
+					if(CONTEXT.lasterror.message.indexOf("302"))
+					{
+						alert("Nothing to show");
+					}
+					else {
+						alert(CONTEXT.lasterror.message);
+					}
+					return false;
 				}
 		);
 	}
@@ -162,9 +149,10 @@
 							//localStorage.setItem(localStorageUserInfo,JSON.stringify(CONTEXT.userinfo));
 							//localStorage.setItem(localStorageCounters,JSON.stringify(CONTEXT.counters));
 					},
-					function(error){		// on error, show error and stop
+					function(xml){		// on error, show error and stop
 							$.mobile.loading('hide');
-							alert("Authentication error" + eval(error));
+							CONTEXT.lasterror = ITSM_MOBILEVIEW.extractError(xml);
+							alert(CONTEXT.lasterror.message);
 					}
 				);
 			});

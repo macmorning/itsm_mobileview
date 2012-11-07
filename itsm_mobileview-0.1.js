@@ -7,6 +7,29 @@
 ;ITSM_MOBILEVIEW = {
 	name: 'ITSM_MOBILEVIEW',
 	context: '/arsys',
+	incidentFields: {
+				number : "ns0\\:Incident_Number",
+				status : "ns0\\:Status",
+				statusReason : "ns0\\:Status_Reason",
+				serviceType : "ns0\\:Service_Type",
+				assignedSGCompany : "ns0\\:Assigned_Support_Company",
+				assignedSGOrganization : "ns0\\:Assigned_Support_Organization",
+				assignedSG : "ns0\\:Assigned_Group",
+				summary : "ns0\\:Summary",
+				priority : "ns0\\:Priority",
+				categorization1 : "ns0\\:Categorization_Tier_1",
+				categorization2 : "ns0\\:Categorization_Tier_2",
+				categorization3 : "ns0\\:Categorization_Tier_3",
+				firstName : "ns0\\:First_Name",
+				lastName : "ns0\\:Last_Name",
+				vip : "ns0\\:VIP",
+				phone : "ns0\\:Phone_Number",
+				email : "ns0\\:Internet_E-mail",
+				region : "ns0\\:Region",
+				site : "ns0\\:Site",
+				reportedDate : "ns0\\:Reported_Date",
+				submitDate : "ns0\\:Submit_Date"		
+	},
 	callService: function(credentials,service,successFn,errorFn)
 	/* callService : calls a service from the MOB:UserCentral AR System web service [RefreshCounters|Connect]
 			credentials : array
@@ -14,8 +37,8 @@
 				"password" : AR System password, as it would be typed on MT login page (either for external authentication or not)
 				"server" : the server name as appearing in MT configuration page
 			service : service name
-			successFn : handler for the "success" ajax event
-			errorFn : handler for the "error" ajax event
+			successFn : handler for the "success" ajax event, called with the xml text of the response
+			errorFn : handler for the "error" ajax event, called with the xml text of the response
 	*/
 	{
 		console.log(ITSM_MOBILEVIEW.name + ' [INFO] callService - service ' + service);
@@ -50,14 +73,25 @@
 				console.log(ITSM_MOBILEVIEW.name + ' [INFO]   ...success');
 				successFn(xml);
 				return true;},
-			error: function(error){
-				console.log(ITSM_MOBILEVIEW.name + ' [ERROR]   ...error!');
-				errorFn(error);
+			error: function(xml,status,error){
+				console.log(ITSM_MOBILEVIEW.name + ' [ERROR]   ...error (' + error + ')');
+				errorFn(xml.responseXML);
 				return false;}
 		});
 		return false;
 	},
 	getList: function(credentials,webservice,operation,qualification,successFn,errorFn)
+	/* getList : calls an ITSM "get list" operation
+			credentials : array
+				"username" : Remedy login name
+				"password" : AR System password, as it would be typed on MT login page (either for external authentication or not)
+				"server" : the server name as appearing in MT configuration page
+			webservice : webservice name, as appears in devStudio and WSDL
+			operation : operation name, as appears in devStudio and WSDL
+			qualification : qualification for the query, example : '\'Assignee Login ID\'="' + CONTEXT.credentials.username + '" AND \'Status\'&lt;5'
+			successFn : handler for the "success" ajax event, called with the xml text of the response
+			errorFn : handler for the "error" ajax event, called with the xml text of the response
+	*/
 	{
 		console.log(ITSM_MOBILEVIEW.name + ' [INFO] getList - operation ' + operation);
 		$.mobile.loading('show');
@@ -95,9 +129,11 @@
 			success: function(xml){
 				console.log(ITSM_MOBILEVIEW.name + ' [INFO]   ...success');
 				successFn(xml);},
-			error: function(error){
-				console.log(ITSM_MOBILEVIEW.name + ' [ERROR]   ...error!');
-				errorFn(error);}
+			error: function(xml,status,error){
+				console.log(ITSM_MOBILEVIEW.name + ' [ERROR]   ...error (' + error + ')');
+				errorFn(xml.responseXML);
+				return false;
+			}
 		});
 		return false;
 	},
@@ -134,6 +170,36 @@
 				+ counters.countApprovals);
 		});
 		return counters;
+	},
+	extractError: function(xml) {
+		var error={};
+		console.log(ITSM_MOBILEVIEW.name + ' [INFO] handleError');
+		$(xml).find("soapenv\\:Fault").each(function()
+		{
+			error = {
+				code: $(this).find("faultcode").text(),
+				message: $(this).find("faultstring").text()
+				};
+			console.log(ITSM_MOBILEVIEW.name + ' [INFO]    ' + error.message);
+		});
+		return error;		
+	},
+	extractIncidents: function(xml) {
+		var incidents = {};
+		console.log(ITSM_MOBILEVIEW.name + ' [INFO] extractIncidents');
+		$(xml).find("ns0\\:getListValues").each(function()
+		{
+			var id = $(this).find(ITSM_MOBILEVIEW.incidentFields.number).text(); // get the incident number; will be used as a key for the incidents array
+			incidents[id] = ITSM_MOBILEVIEW.extractIncidentFields($(this));
+		});
+		return incidents;
+	},
+	extractIncidentFields: function(xml) {
+		var incident = {};
+		$.each(ITSM_MOBILEVIEW.incidentFields, function(key,value) {
+			incident[key] = xml.find(value).text();
+		});	
+		return incident;
 	}
 }
 if ( ! window.console ) console = { log: function(){} };

@@ -1,13 +1,13 @@
 char-set: UTF-8
 #
-#  File exported Sun Nov  4 17:57:37 2012
+#  File exported Wed Nov  7 07:43:21 2012
 #
 begin schema
    name           : MOB:UserCentral
    core-version   : 2
    upgrade-version: 0
    num-fields     : 19
-   timestamp      : 1352026548
+   timestamp      : 1352222791
    owner          : ADMIN
    last-changed   : ADMIN
    default-vui    : Default Administrator View
@@ -15,6 +15,7 @@ begin schema
    export-version : 11
    schema-type    : 1
    next-field-id  : 536870912
+   permission     : 0\2
    get-list-flds  : 2\4\20\0\\600000001\20\0\
    object-prop    : 3\60050\2\1\60062\2\1\60066\4\0\\
 vui  {
@@ -194,6 +195,102 @@ field {
    permission     : 3\2
 }
 field {
+   id             : 103
+   name           : Email Address
+   datatype       : 4
+   fieldtype      : 1
+   create-mode    : 1
+   option         : 4
+   timestamp      : 1352026548
+   owner          : ADMIN
+   last-changed   : ADMIN
+   length-units   : 0
+   maxlength      : 255
+   clob-store-opt : 0
+   menu-style     : 1
+   qbe-match-op   : 1
+   fulltext-optns : 0
+   permission     : 3\2
+ display-instance : 536870912\27\3\41\2\6749\38300\53205\40400\4\6\1\5\6\2\7\40\2147483656\14\40\1\20\4\13\Email Address\21\41\2\0\400\18675\2100\27\8\16\28\6\1\29\6\4\60\40\1\6&
+ display-instance : 1\40\47\65\41\2\7364700\0\7364700\0\66\41\2\7364700\0\7364700\0\90\6\1\91\6\2\143\40\9\151\41\2\19235\0\46456\2100\170\40\0\231\6\1\246\2\-1\250\6\0\288&
+ display-instance : \6\0\289\4\4\0x00\290\4\4\0x00\310\6\0\5116\6\0\
+   help-text      : The email address of the user.
+}
+field {
+   id             : 104
+   name           : Group List
+   datatype       : 4
+   fieldtype      : 1
+   create-mode    : 1
+   option         : 4
+   timestamp      : 1352026548
+   owner          : ADMIN
+   last-changed   : ADMIN
+   length-units   : 0
+   maxlength      : 4000
+   clob-store-opt : 0
+   menu-style     : 1
+   qbe-match-op   : 1
+   fulltext-optns : 0
+   permission     : 3\2
+ display-instance : 536870912\27\3\41\2\6749\45200\59054\49900\4\6\1\5\6\2\7\40\2147483655\14\40\1\20\4\10\Group List\21\41\2\0\400\18672\4700\27\8\16\28\6\1\29\6\4\60\40\3\61\4&
+ display-instance : 0\51\65\41\2\47019\0\49381\2100\66\41\2\49943\0\52305\2100\90\6\1\91\6\1\143\40\3\151\41\2\19235\0\46456\4700\170\40\0\231\6\0\246\2\-1\250\6\0\288\6\0\&
+ display-instance : 289\4\4\0x00\290\4\4\0x00\310\6\0\5116\6\0\
+   help-text      : The list of access control groups to which the user belongs. Group names are separated by spaces.Although you make requests to the Group list using th
+   help-text      : e alias (name for a group), the group Ids are stored as integer values separated by semicolons.
+}
+field {
+   id             : 109
+   name           : License Type
+   datatype       : 6
+   fieldtype      : 1
+   create-mode    : 1
+   option         : 4
+   timestamp      : 1352026548
+   owner          : ADMIN
+   last-changed   : ADMIN
+   enum-value     : Read
+   enum-value     : Fixed
+   enum-value     : Floating
+   enum-value     : Restricted Read
+   default        : 0
+   permission     : 3\2
+ display-instance : 536870912\29\3\41\2\6749\34800\41957\36600\4\6\1\5\6\2\7\40\2147483657\14\40\1\20\4\12\License Type\21\41\2\0\400\7536\1800\27\8\16\28\6\1\29\6\4\60\40\1\61\&
+ display-instance : 40\25\62\6\0\64\6\1\65\41\2\0\0\0\0\66\41\2\0\0\0\0\90\6\1\91\6\1\143\40\5\151\41\2\8098\400\35207\2200\170\40\0\230\4\45\4\0\Read\1\Fixed\2\Floating\3\&
+ display-instance : Restricted Read\231\6\0\246\2\-1\250\6\0\288\6\0\289\4\4\0x00\290\4\4\0x00\310\6\0\
+   help-text      : The type of license the user has.With a read license, your user can read and submit requests within the limitations specified by you. Usually your use
+   help-text      : r will not be able to update existing requests; however, your user may be allowed to update requests he or she created.With a fixed license, your user
+   help-text      :  can read, submit, and update existing requests within the limitations specified by you. Fixed licenses are permanently associated with a single user na
+   help-text      : me. With this type of license, your user can always access the system.With a floating license, your user has the same privileges as with the fixed lic
+   help-text      : ense. However, floating licenses are not attached to any single user name. Only a certain number of licenses are available for use. If no license is ava
+   help-text      : ilable when your user tries to log in, he or she receives a message informing them that no license token is currently available and your user is given a
+   help-text      : ccess to the system with read-only permission. When a license becomes available, your user receives a message indicating that he or she has been allocat
+   help-text      : ed a license.This field is a required field. You must choose one of the choices (or use the default) before saving the record.
+}
+field {
+   id             : 536870920
+   name           : Full Name
+   datatype       : 4
+   fieldtype      : 1
+   create-mode    : 1
+   option         : 4
+   timestamp      : 1352026548
+   owner          : ADMIN
+   last-changed   : ADMIN
+   length-units   : 0
+   maxlength      : 254
+   clob-store-opt : 0
+   menu-style     : 1
+   qbe-match-op   : 1
+   fulltext-optns : 0
+   permission     : 3\2
+ display-instance : 536870912\27\3\41\2\6749\41300\53205\43400\4\6\1\5\6\2\7\40\2147483654\14\40\1\20\4\9\Full Name\21\41\2\0\400\18672\2100\27\8\16\28\6\1\29\6\4\60\40\1\61\40\&
+ display-instance : 51\65\41\2\4387\0\4387\0\66\41\2\4387\0\4387\0\90\6\1\91\6\2\143\40\1\151\41\2\19235\0\46456\2100\170\40\0\231\6\1\246\2\-1\250\6\0\288\6\0\289\4\4\0x00&
+ display-instance : \290\4\4\0x00\310\6\0\5116\6\0\
+   help-text      : The full name and/or other descriptive text that you want to further describe this user record.This field is a required field. You must enter data in 
+   help-text      : this field before saving the record.
+}
+field {
    id             : 600000000
    name           : z1D_serviceName
    datatype       : 4
@@ -291,102 +388,6 @@ field {
  display-instance : 536870912\16\3\41\2\65241\47300\88413\49400\4\6\1\5\6\2\7\40\2147483653\14\40\1\20\4\15\countSignatures\21\41\2\0\400\8436\2100\62\6\1\66\41\2\0\0\0\0\143\40&
  display-instance : \4294967295\151\41\2\9561\0\23171\2100\170\40\0\288\6\0\289\4\4\0x00\290\4\4\0x00\310\6\0\
 }
-field {
-   id             : 536870920
-   name           : Full Name
-   datatype       : 4
-   fieldtype      : 1
-   create-mode    : 1
-   option         : 4
-   timestamp      : 1352026548
-   owner          : ADMIN
-   last-changed   : ADMIN
-   length-units   : 0
-   maxlength      : 254
-   clob-store-opt : 0
-   menu-style     : 1
-   qbe-match-op   : 1
-   fulltext-optns : 0
-   permission     : 3\2
- display-instance : 536870912\27\3\41\2\6749\41300\53205\43400\4\6\1\5\6\2\7\40\2147483654\14\40\1\20\4\9\Full Name\21\41\2\0\400\18672\2100\27\8\16\28\6\1\29\6\4\60\40\1\61\40\&
- display-instance : 51\65\41\2\4387\0\4387\0\66\41\2\4387\0\4387\0\90\6\1\91\6\2\143\40\1\151\41\2\19235\0\46456\2100\170\40\0\231\6\1\246\2\-1\250\6\0\288\6\0\289\4\4\0x00&
- display-instance : \290\4\4\0x00\310\6\0\5116\6\0\
-   help-text      : The full name and/or other descriptive text that you want to further describe this user record.This field is a required field. You must enter data in 
-   help-text      : this field before saving the record.
-}
-field {
-   id             : 104
-   name           : Group List
-   datatype       : 4
-   fieldtype      : 1
-   create-mode    : 1
-   option         : 4
-   timestamp      : 1352026548
-   owner          : ADMIN
-   last-changed   : ADMIN
-   length-units   : 0
-   maxlength      : 4000
-   clob-store-opt : 0
-   menu-style     : 1
-   qbe-match-op   : 1
-   fulltext-optns : 0
-   permission     : 3\2
- display-instance : 536870912\27\3\41\2\6749\45200\59054\49900\4\6\1\5\6\2\7\40\2147483655\14\40\1\20\4\10\Group List\21\41\2\0\400\18672\4700\27\8\16\28\6\1\29\6\4\60\40\3\61\4&
- display-instance : 0\51\65\41\2\47019\0\49381\2100\66\41\2\49943\0\52305\2100\90\6\1\91\6\1\143\40\3\151\41\2\19235\0\46456\4700\170\40\0\231\6\0\246\2\-1\250\6\0\288\6\0\&
- display-instance : 289\4\4\0x00\290\4\4\0x00\310\6\0\5116\6\0\
-   help-text      : The list of access control groups to which the user belongs. Group names are separated by spaces.Although you make requests to the Group list using th
-   help-text      : e alias (name for a group), the group Ids are stored as integer values separated by semicolons.
-}
-field {
-   id             : 103
-   name           : Email Address
-   datatype       : 4
-   fieldtype      : 1
-   create-mode    : 1
-   option         : 4
-   timestamp      : 1352026548
-   owner          : ADMIN
-   last-changed   : ADMIN
-   length-units   : 0
-   maxlength      : 255
-   clob-store-opt : 0
-   menu-style     : 1
-   qbe-match-op   : 1
-   fulltext-optns : 0
-   permission     : 3\2
- display-instance : 536870912\27\3\41\2\6749\38300\53205\40400\4\6\1\5\6\2\7\40\2147483656\14\40\1\20\4\13\Email Address\21\41\2\0\400\18675\2100\27\8\16\28\6\1\29\6\4\60\40\1\6&
- display-instance : 1\40\47\65\41\2\7364700\0\7364700\0\66\41\2\7364700\0\7364700\0\90\6\1\91\6\2\143\40\9\151\41\2\19235\0\46456\2100\170\40\0\231\6\1\246\2\-1\250\6\0\288&
- display-instance : \6\0\289\4\4\0x00\290\4\4\0x00\310\6\0\5116\6\0\
-   help-text      : The email address of the user.
-}
-field {
-   id             : 109
-   name           : License Type
-   datatype       : 6
-   fieldtype      : 1
-   create-mode    : 1
-   option         : 4
-   timestamp      : 1352026548
-   owner          : ADMIN
-   last-changed   : ADMIN
-   enum-value     : Read
-   enum-value     : Fixed
-   enum-value     : Floating
-   enum-value     : Restricted Read
-   default        : 0
-   permission     : 3\2
- display-instance : 536870912\29\3\41\2\6749\34800\41957\36600\4\6\1\5\6\2\7\40\2147483657\14\40\1\20\4\12\License Type\21\41\2\0\400\7536\1800\27\8\16\28\6\1\29\6\4\60\40\1\61\&
- display-instance : 40\25\62\6\0\64\6\1\65\41\2\0\0\0\0\66\41\2\0\0\0\0\90\6\1\91\6\1\143\40\5\151\41\2\8098\400\35207\2200\170\40\0\230\4\45\4\0\Read\1\Fixed\2\Floating\3\&
- display-instance : Restricted Read\231\6\0\246\2\-1\250\6\0\288\6\0\289\4\4\0x00\290\4\4\0x00\310\6\0\
-   help-text      : The type of license the user has.With a read license, your user can read and submit requests within the limitations specified by you. Usually your use
-   help-text      : r will not be able to update existing requests; however, your user may be allowed to update requests he or she created.With a fixed license, your user
-   help-text      :  can read, submit, and update existing requests within the limitations specified by you. Fixed licenses are permanently associated with a single user na
-   help-text      : me. With this type of license, your user can always access the system.With a floating license, your user has the same privileges as with the fixed lic
-   help-text      : ense. However, floating licenses are not attached to any single user name. Only a certain number of licenses are available for use. If no license is ava
-   help-text      : ilable when your user tries to log in, he or she receives a message informing them that no license token is currently available and your user is given a
-   help-text      : ccess to the system with read-only permission. When a license becomes available, your user receives a message indicating that he or she has been allocat
-   help-text      : ed a license.This field is a required field. You must choose one of the choices (or use the default) before saving the record.
-}
 end
 begin filter
    name           : MOB:UserCentral_ServiceConnect_010_CallGuide
@@ -402,10 +403,10 @@ begin filter
    filter-query   : 4\1\99\600000000\2\4\7\Connect\
    action {
       set-field   : 0\109\102\1\@\4\User\1\109\4\1\1\101\2\1\1\2\3\
-      set-field   : 1\104\102\1\@\4\User\1\104\4\1\1\101\2\1\1\2\3\
-      set-field   : 2\103\102\1\@\4\User\1\103\4\1\1\101\2\1\1\2\3\
-      set-field   : 3\8\102\1\@\4\User\1\8\4\1\1\101\2\1\1\2\3\
-      set-field   : 4\536870920\102\1\@\4\User\1\8\4\1\1\101\2\1\1\2\3\
+      set-field   : 1\536870920\102\1\@\4\User\1\8\4\1\1\101\2\1\1\2\3\
+      set-field   : 2\8\102\1\@\4\User\1\8\4\1\1\101\2\1\1\2\3\
+      set-field   : 3\103\102\1\@\4\User\1\103\4\1\1\101\2\1\1\2\3\
+      set-field   : 4\104\102\1\@\4\User\1\104\4\1\1\101\2\1\1\2\3\
    }
    action {
       call-server : @
@@ -417,10 +418,10 @@ begin filter
    }
    action {
       push-field  : 0\1\@\15\MOB:UserCentral\1\600000002\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000002\0\1\4\
-      push-field  : 1\1\@\15\MOB:UserCentral\1\600000004\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000004\0\1\4\
-      push-field  : 2\1\@\15\MOB:UserCentral\1\600000005\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000005\0\1\4\
-      push-field  : 3\1\@\15\MOB:UserCentral\1\600000003\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000003\0\1\4\
-      push-field  : 4\1\@\15\MOB:UserCentral\1\600000001\4\1\1\4\2\1\1\4\5\101\1\2\
+      push-field  : 1\1\@\15\MOB:UserCentral\1\600000001\4\1\1\4\2\1\1\4\5\101\1\2\
+      push-field  : 2\1\@\15\MOB:UserCentral\1\600000003\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000003\0\1\4\
+      push-field  : 3\1\@\15\MOB:UserCentral\1\600000005\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000005\0\1\4\
+      push-field  : 4\1\@\15\MOB:UserCentral\1\600000004\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000004\0\1\4\
    }
    errhandler-opt : 0
 end
@@ -446,9 +447,9 @@ begin filter
    }
    action {
       push-field  : 0\1\@\15\MOB:UserCentral\1\600000002\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000002\0\1\4\
-      push-field  : 1\1\@\15\MOB:UserCentral\1\600000004\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000004\0\1\4\
+      push-field  : 1\1\@\15\MOB:UserCentral\1\600000003\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000003\0\1\4\
       push-field  : 2\1\@\15\MOB:UserCentral\1\600000005\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000005\0\1\4\
-      push-field  : 3\1\@\15\MOB:UserCentral\1\600000003\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000003\0\1\4\
+      push-field  : 3\1\@\15\MOB:UserCentral\1\600000004\4\1\1\4\2\1\1\4\5\102\1\@\1\@\1\600000004\0\1\4\
    }
    errhandler-opt : 0
 end
