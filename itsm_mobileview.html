@@ -16,6 +16,11 @@
 	<!-- -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="itsm_mobileview-0.1.js"></script>
+	<style>
+		.detail_label {
+			color:darkred;
+		}
+	</style>
 	<script>
 	if ( ! window.console ) console = { log: function(){} };
 	var localStorageCredentials = "ITSMMobileContextCredentials";
@@ -48,15 +53,13 @@
 		tasks : {},
 		approvals : {}
 	}
-	
-	
 	function showIncident(id)
 	{
 		$('#incident_id').text(CONTEXT.incidents[id].number);
-		$('#incident_summary').val(CONTEXT.incidents[id].summary);
-		$('#incident_priority').val(CONTEXT.incidents[id].priority);
-		$('#incident_status').val(CONTEXT.incidents[id].status);
-		$('#incident_assignedSG').val(CONTEXT.incidents[id].assignedSG);
+		$('#incident_summary').text(CONTEXT.incidents[id].summary);
+		$('#incident_priority').text(CONTEXT.incidents[id].priority);
+		$('#incident_status').text(CONTEXT.incidents[id].status);
+		$('#incident_assignedSG').text(CONTEXT.incidents[id].assignedSG);
 		ITSM_MOBILEVIEW.getList(
 			CONTEXT.credentials,
 			'HPD_IncidentInterface_WS',
@@ -97,7 +100,8 @@
 								<a href="#" onclick="showIncident(\'' + key + '\')">\
 									<h1>' + key + ' - ' + value.priority + '</h1>\
 									<p><b>' + value.status + "</b><br/>" +
-									value.summary + '</p>\
+									value.summary + '<br/>'+
+									value.site + '</p>\
 								</a>\
 							</li>');
 					});
@@ -222,14 +226,10 @@
 		<a href="#" data-icon="save" data-iconpos="notext">Save</a>
 	</header>
 	<form method="POST" action="" data-ajax="false">
-		<label for="incident_priority">Priority:</label>
-		<input type="text" name="incident_priority" id="incident_priority" />
-		<label for="incident_status">Status:</label>
-		<input type="text" name="incident_status" id="incident_status" />
-		<label for="incident_assignedSG">Assigned group:</label>
-		<input type="text" name="incident_assignedSG" id="incident_assignedSG" />
-		<label for="incident_summary">Summary:</label>
-		<textarea rows="3" name="incident_summary" id="incident_summary"/>
+		<label for="incident_priority" class="detail_label">Priority:</label><span id="incident_priority"></span><br/>
+		<label for="incident_status" class="detail_label">Status:</label><span id="incident_status"/></span><br/>
+		<label for="incident_assignedSG" class="detail_label">Group:</label><span id="incident_assignedSG"/></span><br/>
+		<label for="incident_summary" class="detail_label">Summary:</label><span id="incident_summary"/></span><br/>
 	</form>	
 	<footer data-role="footer" data-position="fixed">
 		<nav data-role="navbar">
