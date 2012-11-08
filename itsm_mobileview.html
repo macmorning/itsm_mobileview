@@ -18,6 +18,9 @@
 	<script src="itsm_mobileview-0.1.js"></script>
 	<style>
 		.detail_label {
+			width:90px;
+			float:left;
+			text-align:right;
 			color:darkred;
 		}
 	</style>
@@ -60,6 +63,19 @@
 		$('#incident_priority').text(CONTEXT.incidents[id].priority);
 		$('#incident_status').text(CONTEXT.incidents[id].status);
 		$('#incident_assignedSG').text(CONTEXT.incidents[id].assignedSG);
+		$('#incident_serviceType').text(CONTEXT.incidents[id].serviceType);
+		$('#incident_categorization1').text(CONTEXT.incidents[id].categorization1);
+		$('#incident_categorization2').text(CONTEXT.incidents[id].categorization2);
+		$('#incident_categorization3').text(CONTEXT.incidents[id].categorization3);
+		$('#incident_firstName').text(CONTEXT.incidents[id].firstName);
+		$('#incident_lastName').text(CONTEXT.incidents[id].lastName);
+		$('#incident_vip').text(CONTEXT.incidents[id].vip);
+		$('#incident_phone').text(CONTEXT.incidents[id].phone);
+		$('#incident_email').text(CONTEXT.incidents[id].email);
+		$('#incident_region').text(CONTEXT.incidents[id].region);
+		$('#incident_site').text(CONTEXT.incidents[id].site);
+		$('#incident_reportedDate').text(CONTEXT.incidents[id].reportedDate);
+		$('#incident_submitDate').text(CONTEXT.incidents[id].submitDate);
 		ITSM_MOBILEVIEW.getList(
 			CONTEXT.credentials,
 			'HPD_IncidentInterface_WS',
@@ -86,6 +102,7 @@
 	{
 		console.log('listIncidents called');
 		$.mobile.loading('show');
+		$("#incidentslist").children().remove();
 		CONTEXT.incidents = {}; // init the incidents array
 		ITSM_MOBILEVIEW.getList(
 				CONTEXT.credentials,
@@ -93,9 +110,10 @@
 				'HelpDesk_QueryList_Service',
 				'\'Assignee Login ID\'="' + CONTEXT.credentials.username + '" AND \'Status\'&lt;5',
 				function(xml) {
+					var html = "";
 					CONTEXT.incidents = ITSM_MOBILEVIEW.extractIncidents(xml);
 					$.each(CONTEXT.incidents,function(key,value) {
-						$("#incidentslist").append('\
+						html = html + ('\
 							<li>\
 								<a href="#" onclick="showIncident(\'' + key + '\')">\
 									<h1>' + key + ' - ' + value.priority + '</h1>\
@@ -107,7 +125,8 @@
 					});
 					$.mobile.loading('hide');
 					$.mobile.changePage($("#incidentspage"));
-					$("#incidentslist").trigger('create');
+					// Add the elements, then init the jquery listview
+					$("#incidentslist").prepend(html).listview().listview('refresh');
 				},
 				function(xml)
 				{
@@ -204,6 +223,7 @@
 	</header>
 	<article data-role="content">
 		<ul data-role="listview" data-filter="true" id="incidentslist">
+			
 			<!-- incidents come here in <li> elements -->
 		</ul>
 	</article>
@@ -225,12 +245,18 @@
 		<a href="#incidentspage" data-icon="back" data-iconpos="notext">Previous</a>
 		<a href="#" data-icon="save" data-iconpos="notext">Save</a>
 	</header>
-	<form method="POST" action="" data-ajax="false">
+	<fieldset>
 		<label for="incident_priority" class="detail_label">Priority:</label><span id="incident_priority"></span><br/>
 		<label for="incident_status" class="detail_label">Status:</label><span id="incident_status"/></span><br/>
 		<label for="incident_assignedSG" class="detail_label">Group:</label><span id="incident_assignedSG"/></span><br/>
 		<label for="incident_summary" class="detail_label">Summary:</label><span id="incident_summary"/></span><br/>
-	</form>	
+		<label for="incident_serviceType" class="detail_label">Type:</label><span id="incident_serviceType"/></span><br/>
+		<label for="incident_categorization1" class="detail_label">Cat 1:</label><span id="incident_categorization1"/></span><br/>
+		<label for="incident_categorization2" class="detail_label">Cat 2:</label><span id="incident_categorization2"/></span><br/>
+		<label for="incident_categorization3" class="detail_label">Cat 3:</label><span id="incident_categorization3"/></span><br/>
+		<label for="incident_reportedDate" class="detail_label">Reported:</label><span id="incident_reportedDate"/></span><br/>
+		<label for="incident_submitDate" class="detail_label">Submitted:</label><span id="incident_submitDate"/></span><br/>
+	</fieldset>	
 	<footer data-role="footer" data-position="fixed">
 		<nav data-role="navbar">
 			<ul>
