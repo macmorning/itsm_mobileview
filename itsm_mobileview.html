@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<!-- Comment if using online libraries
+	<!-- Comment if using online libraries-->
 	<link rel="stylesheet" href="lib/jquery.mobile-1.2.0.min.css" />
 	<script src="lib/jquery-1.8.2.min.js"></script>
 	<script src="lib/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="lib/modernizr-latest.js"></script>
 	<!-- -->
-	<!-- Comment if using offline libraries -->
+	<!-- Comment if using offline libraries
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
@@ -73,8 +73,10 @@
 		$('#incident_categorization2').text(CONTEXT.incidents[id].categorization2);
 		$('#incident_categorization3').text(CONTEXT.incidents[id].categorization3);
 		$('#incident_vip').text(CONTEXT.incidents[id].vip);
-		$('#incident_phone').text(CONTEXT.incidents[id].phone);
-		$('#incident_email').text(CONTEXT.incidents[id].email);
+		document.getElementById('incident_phone').innerHTML = CONTEXT.incidents[id].phone;
+		document.getElementById('incident_phone_link').href = "tel:" + CONTEXT.incidents[id].phone;
+		document.getElementById('incident_email').innerHTML = CONTEXT.incidents[id].email;
+		document.getElementById('incident_email_link').href = "mailto:" + CONTEXT.incidents[id].email;
 		$('#incident_region').text(CONTEXT.incidents[id].region);
 		$('#incident_city').text(CONTEXT.incidents[id].city);
 		$('#incident_siteGroup').text(CONTEXT.incidents[id].siteGroup);
@@ -271,8 +273,8 @@
 		<h3 id="incident_fullName_header">User</h3>
 			<fieldset>
 				<label for="incident_vip" class="detail_label">VIP:</label><span id="incident_vip"/></span><br/>
-				<label for="incident_phone" class="detail_label">Phone:</label><span id="incident_phone"/></span><br/>
-				<label for="incident_email" class="detail_label">E-mail:</label><span id="incident_email"/></span><br/>
+				<label for="incident_phone" class="detail_label">Phone:</label><a id="incident_phone_link" href="#"><span id="incident_phone"/></span></a><br/>
+				<label for="incident_email" class="detail_label">E-mail:</label><a id="incident_email_link" href="#"><span id="incident_email"/></span></a><br/>
 				<label for="incident_region" class="detail_label">Region:</label><span id="incident_region"/></span><br/>
 				<label for="incident_city" class="detail_label">City:</label><span id="incident_city"/></span><br/>
 				<label for="incident_siteGroup" class="detail_label">Site grp:</label><span id="incident_siteGroup"/></span><br/>
